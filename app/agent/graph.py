@@ -6,8 +6,9 @@ r"""LangGraph workflow that routes questions to document retrieval, SQL, or both
                                                      ^            |
                                                      +-- retry ---+  (validation / DB error)
 
-If an SQL-routed question yields no usable rows, the graph falls back to ``retrieve``
-(the router may have mis-classified a document question).
+If an SQL-routed question yields no usable rows, or the SQL evidence does not answer it
+(the LLM refuses), the graph falls back to ``retrieve`` once before refusing (the router
+may have mis-classified a document question).
 
 Every node converts domain errors into state (``warnings`` / ``sql_error``) instead of
 raising, so a failing dependency degrades the answer rather than failing the request.
@@ -251,6 +252,18 @@ class ResearchAgent:
             return "retrieve"
         return "synthesize"
 
+    @staticmethod
+    def _after_synthesize(state: AgentState) -> str:
+        # The SQL result did not answer the question (the LLM refused): the router may have
+        # sent a document question to SQL, so consult the documents before refusing.
+        if (
+            state.get("insufficient_evidence")
+            and state["route"] == "sql"
+            and "retrieve" not in state.get("steps", [])
+        ):
+            return "retrieve"
+        return END
+
     def _build(self):
         graph = StateGraph(AgentState)
         graph.add_node("route", self._route)
@@ -264,7 +277,7 @@ class ResearchAgent:
         graph.add_conditional_edges("retrieve", self._after_retrieve, ["generate_sql", "synthesize"])
         graph.add_edge("generate_sql", "execute_sql")
         graph.add_conditional_edges("execute_sql", self._after_execute, ["generate_sql", "retrieve", "synthesize"])
-        graph.add_edge("synthesize", END)
+        graph.add_conditional_edges("synthesize", self._after_synthesize, ["retrieve", END])
         return graph.compile()
 
     # ------------------------------------------------------------------- run

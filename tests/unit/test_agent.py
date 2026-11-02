@@ -198,6 +198,24 @@ def test_sql_route_with_empty_result_falls_back_to_documents(ingested_services):
     assert not state["insufficient_evidence"]
 
 
+def test_sql_answer_refusal_falls_back_to_documents(ingested_services):
+    calls = {"answer": 0}
+
+    def handler(kind, system, user):
+        if kind == "route":
+            return json.dumps({"route": "sql", "reason": "looks numeric"})
+        if kind == "sql":
+            return "SELECT count(*) AS value FROM orders"
+        calls["answer"] += 1
+        # First synthesis sees only the SQL result and refuses; second sees documents.
+        return "INSUFFICIENT_EVIDENCE" if calls["answer"] == 1 else "Net Promoter Score rose to 58 [1]."
+
+    state = ingested_services(llm=FakeLLM(handler)).agent.run("What was the Net Promoter Score?")
+    assert state["steps"] == ["route", "generate_sql", "execute_sql", "synthesize", "retrieve", "synthesize"]
+    assert not state["insufficient_evidence"]
+    assert state["citations"][0]["source"] == "annual_report_2025.pdf"
+
+
 def test_forced_mode_skips_router(make_services):
     llm = FakeLLM(scripted(route="documents", answer="42 [SQL]"))
     state = make_services(llm=llm).agent.run("anything", mode="sql")

@@ -9,7 +9,7 @@
 {"id": "n09", "question": "How many employees does the company have?", "answerable": false}
 {"id": "n10", "question": "What dividend did the company pay to shareholders?", "answerable": false}
 {"id": "n11", "question": "What are the store hours on Black Friday?", "answerable": false}
-{"id": "n12", "question": "Does the company have a store in Winnipeg?", "answerable": false}
+{"id": "n12", "question": "Do you offer a military discount?", "answerable": false}
 {"id": "n13", "question": "What was the CEO's salary in 2025?", "answerable": false}
 {"id": "n14", "question": "How much carbon did the company emit in tonnes in 2023?", "answerable": false}
 {"id": "n15", "question": "Which payment apps are accepted at checkout?", "answerable": false}

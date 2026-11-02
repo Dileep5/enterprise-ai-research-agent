@@ -1,0 +1,779 @@
+{
+  "per_item": [
+    {
+      "id": "p01",
+      "question": "How long until my money comes back after I bring something back?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "Refunds are processed within 5 to 7 business days after the return is received [1]. The evidence does not specify how long it takes for the money to actually appear in your account after processing.",
+      "cited_sources": [
+        "return_policy.txt"
+      ],
+      "insufficient_evidence": false,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [],
+      "latency_ms": 3632.0,
+      "keyword_recall": 1.0,
+      "citation_precision": 1.0,
+      "citation_supports_answer": true,
+      "numbers_unsupported": []
+    },
+    {
+      "id": "p02",
+      "question": "Can I get my money back on clearance stuff?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "You cannot get your money back on clearance items marked \"FINAL,\" as they are not eligible for return or exchange [1].",
+      "cited_sources": [
+        "return_policy.txt"
+      ],
+      "insufficient_evidence": false,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [],
+      "latency_ms": 1694.9,
+      "keyword_recall": 1.0,
+      "citation_precision": 1.0,
+      "citation_supports_answer": true,
+      "numbers_unsupported": []
+    },
+    {
+      "id": "p03",
+      "question": "What happens if I lose my receipt?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "If you lose your receipt, you can still return items, but the return will be limited to store credit at the item's lowest selling price in the previous 60 days. Additionally, you are allowed a maximum of three receipt-less returns per customer per year [1].",
+      "cited_sources": [
+        "return_policy.txt"
+      ],
+      "insufficient_evidence": false,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [],
+      "latency_ms": 2014.0,
+      "keyword_recall": 1.0,
+      "citation_precision": 1.0,
+      "citation_supports_answer": true,
+      "numbers_unsupported": []
+    },
+    {
+      "id": "p04",
+      "question": "My boots fell apart after two months, what do I do?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "I could not find sufficient evidence in the available sources to answer this question.",
+      "cited_sources": [],
+      "insufficient_evidence": true,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [
+        "Document evidence insufficient (best rerank score -9.99 (threshold -9.0))."
+      ],
+      "latency_ms": 766.1,
+      "keyword_recall": 0.0
+    },
+    {
+      "id": "p05",
+      "question": "Is there a charge for swapping a jacket for a different size?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "I could not find sufficient evidence in the available sources to answer this question.",
+      "cited_sources": [],
+      "insufficient_evidence": true,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [
+        "Document evidence insufficient (best rerank score -9.44 (threshold -9.0))."
+      ],
+      "latency_ms": 805.5,
+      "keyword_recall": 0.0
+    },
+    {
+      "id": "p06",
+      "question": "How fast does a buy-online pickup order need to be prepared?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "A buy-online pickup order needs to be prepared within 2 hours of the order confirmation during opening hours [1].",
+      "cited_sources": [
+        "store_operations_handbook.md"
+      ],
+      "insufficient_evidence": false,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [],
+      "latency_ms": 1546.2,
+      "keyword_recall": 1.0,
+      "citation_precision": 1.0,
+      "citation_supports_answer": true,
+      "numbers_unsupported": []
+    },
+    {
+      "id": "p07",
+      "question": "What should happen if counted stock differs from the system by a lot?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "If counted stock differs from the system by a lot, specifically if the inventory variance is above 3% of counted value for a category, it triggers a full recount of that category within 48 hours [1].",
+      "cited_sources": [
+        "store_operations_handbook.md"
+      ],
+      "insufficient_evidence": false,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [],
+      "latency_ms": 1864.7,
+      "keyword_recall": 1.0,
+      "citation_precision": 1.0,
+      "citation_supports_answer": true,
+      "numbers_unsupported": []
+    },
+    {
+      "id": "p08",
+      "question": "How quickly must workplace injuries be written up?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "Workplace safety incidents must be logged in the incident system within 12 hours [1].",
+      "cited_sources": [
+        "store_operations_handbook.md"
+      ],
+      "insufficient_evidence": false,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [],
+      "latency_ms": 1457.9,
+      "keyword_recall": 1.0,
+      "citation_precision": 1.0,
+      "citation_supports_answer": true,
+      "numbers_unsupported": []
+    },
+    {
+      "id": "p09",
+      "question": "Who leads the company?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "The company is led by Priya Natarajan, who is the Chief Executive Officer [3].",
+      "cited_sources": [
+        "annual_report_2025.pdf"
+      ],
+      "insufficient_evidence": false,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [],
+      "latency_ms": 1725.0,
+      "keyword_recall": 1.0,
+      "citation_precision": 1.0,
+      "citation_supports_answer": true,
+      "numbers_unsupported": []
+    },
+    {
+      "id": "p10",
+      "question": "How much did profitability on goods sold improve?",
+      "expected_route": "documents",
+      "route": "sql",
+      "answer": "I could not find sufficient evidence in the available sources to answer this question.",
+      "cited_sources": [],
+      "insufficient_evidence": true,
+      "sql_query": "SELECT ROUND(SUM(order_items.quantity * order_items.unit_price * (1 - order_items.discount_pct / 100)), 2) AS total_revenue FROM order_items JOIN orders ON order_items.order_id = orders.order_id WHERE orders.status = 'completed' LIMIT 201",
+      "sql_error": null,
+      "sql_attempts": 1,
+      "warnings": [],
+      "latency_ms": 2151.8,
+      "keyword_recall": 0.0
+    },
+    {
+      "id": "p11",
+      "question": "How happy are customers according to the recommendation metric?",
+      "expected_route": "documents",
+      "route": "sql",
+      "answer": "I could not find sufficient evidence in the available sources to answer this question.",
+      "cited_sources": [],
+      "insufficient_evidence": true,
+      "sql_query": "SELECT c.customer_id, c.first_name, c.last_name, COUNT(o.order_id) AS total_orders, SUM(oi.quantity * oi.unit_price * (1 - oi.discount_pct / 100)) AS total_revenue FROM customers AS c LEFT JOIN orders AS o ON c.customer_id = o.customer_id AND o.status = 'completed' LEFT JOIN order_items AS oi ON o.order_id = oi.order_id GROUP BY c.customer_id, c.first_name, c.last_name LIMIT 201",
+      "sql_error": null,
+      "sql_attempts": 1,
+      "warnings": [],
+      "latency_ms": 2557.1,
+      "keyword_recall": 0.0
+    },
+    {
+      "id": "p12",
+      "question": "What fraction of goods sold were sent back?",
+      "expected_route": "documents",
+      "route": "sql",
+      "answer": "The fraction of goods sold that were sent back is 0.92 [SQL].",
+      "cited_sources": [],
+      "insufficient_evidence": false,
+      "sql_query": "SELECT ROUND(SUM(CASE WHEN o.status = 'completed' THEN oi.quantity ELSE 0 END) * 1.0 / NULLIF(SUM(oi.quantity), 0), 2) AS fraction_returned FROM order_items AS oi JOIN orders AS o ON oi.order_id = o.order_id WHERE o.status = 'completed' OR o.status = 'returned' LIMIT 201",
+      "sql_error": null,
+      "sql_attempts": 1,
+      "warnings": [],
+      "latency_ms": 2459.1,
+      "keyword_recall": 0.0,
+      "numbers_unsupported": []
+    },
+    {
+      "id": "p13",
+      "question": "Where are the company planning more locations?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "The company is planning to evaluate two additional store locations in Atlantic Canada [1].",
+      "cited_sources": [
+        "annual_report_2025.pdf"
+      ],
+      "insufficient_evidence": false,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [],
+      "latency_ms": 1695.2,
+      "keyword_recall": 1.0,
+      "citation_precision": 1.0,
+      "citation_supports_answer": true,
+      "numbers_unsupported": []
+    },
+    {
+      "id": "p14",
+      "question": "What do I get on my birthday as a member?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "As a member, you receive a 200-point bonus during your birthday month [1]. This bonus can be redeemed, as every 1,000 points can be exchanged for a CAD 10 reward certificate [1]. \n\nThe evidence does not cover any additional birthday benefits beyond the points bonus.",
+      "cited_sources": [
+        "loyalty_program.docx"
+      ],
+      "insufficient_evidence": false,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [],
+      "latency_ms": 2118.3,
+      "keyword_recall": 1.0,
+      "citation_precision": 1.0,
+      "citation_supports_answer": true,
+      "numbers_unsupported": []
+    },
+    {
+      "id": "p15",
+      "question": "How many points do I need for a ten dollar reward?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "You need 1,000 points for a CAD 10 reward certificate [1].",
+      "cited_sources": [
+        "loyalty_program.docx"
+      ],
+      "insufficient_evidence": false,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [],
+      "latency_ms": 2186.7,
+      "keyword_recall": 1.0,
+      "citation_precision": 1.0,
+      "citation_supports_answer": true,
+      "numbers_unsupported": []
+    },
+    {
+      "id": "p16",
+      "question": "Which vendors have the best environmental scores and make clothing?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "The vendors with the best environmental scores that make clothing are:\n\n1. Lakeshore Textiles - sustainability_rating: A [1].\n2. Cedar & Co Merino - sustainability_rating: A [3].\n\nBoth vendors have an \"A\" sustainability rating, indicating they have the best environmental scores among clothing manufacturers listed in the evidence.",
+      "cited_sources": [
+        "supplier_directory.csv",
+        "supplier_directory.csv"
+      ],
+      "insufficient_evidence": false,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [],
+      "latency_ms": 1870.2,
+      "keyword_recall": 1.0,
+      "citation_precision": 1.0,
+      "citation_supports_answer": true,
+      "numbers_unsupported": []
+    },
+    {
+      "id": "p17",
+      "question": "Which camping gear maker is located in Portugal?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "The camping gear maker located in Portugal is Granite Footwear Ltd, which is categorized under Footwear [1].",
+      "cited_sources": [
+        "supplier_directory.csv"
+      ],
+      "insufficient_evidence": false,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [],
+      "latency_ms": 1688.6,
+      "keyword_recall": 1.0,
+      "citation_precision": 1.0,
+      "citation_supports_answer": true,
+      "numbers_unsupported": []
+    },
+    {
+      "id": "p18",
+      "question": "What time do shops open on Sundays?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "Shops open on Sundays from 11:00 to 18:00 [1].",
+      "cited_sources": [
+        "store_operations_handbook.md"
+      ],
+      "insufficient_evidence": false,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [],
+      "latency_ms": 1694.8,
+      "keyword_recall": 1.0,
+      "citation_precision": 1.0,
+      "citation_supports_answer": true,
+      "numbers_unsupported": []
+    },
+    {
+      "id": "p19",
+      "question": "When does the cash drawer get balanced?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "I could not find sufficient evidence in the available sources to answer this question.",
+      "cited_sources": [],
+      "insufficient_evidence": true,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [
+        "Document evidence insufficient (best rerank score -10.05 (threshold -9.0))."
+      ],
+      "latency_ms": 747.0,
+      "keyword_recall": 0.0
+    },
+    {
+      "id": "p20",
+      "question": "How much extra buffer inventory for tents in summer?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "The extra buffer inventory for tents in summer is raised by 25% between April and August for camping gear, which includes tents [1]. \n\nThe evidence does not cover specific quantities or how this percentage translates into actual inventory numbers.",
+      "cited_sources": [
+        "store_operations_handbook.md"
+      ],
+      "insufficient_evidence": false,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [],
+      "latency_ms": 1760.0,
+      "keyword_recall": 1.0,
+      "citation_precision": 1.0,
+      "citation_supports_answer": true,
+      "numbers_unsupported": []
+    },
+    {
+      "id": "n01",
+      "question": "What is the parental leave policy for store employees?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "I could not find sufficient evidence in the available sources to answer this question.",
+      "cited_sources": [],
+      "insufficient_evidence": true,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [],
+      "latency_ms": 1249.6,
+      "keyword_recall": null,
+      "correct_refusal": true
+    },
+    {
+      "id": "n02",
+      "question": "Do employees get a discount on merchandise?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "I could not find sufficient evidence in the available sources to answer this question.",
+      "cited_sources": [],
+      "insufficient_evidence": true,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [
+        "Document evidence insufficient (best rerank score -9.58 (threshold -9.0))."
+      ],
+      "latency_ms": 738.3,
+      "keyword_recall": null,
+      "correct_refusal": true
+    },
+    {
+      "id": "n03",
+      "question": "Who is the Chief Financial Officer?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "I could not find sufficient evidence in the available sources to answer this question.",
+      "cited_sources": [],
+      "insufficient_evidence": true,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [
+        "Document evidence insufficient (best rerank score -9.79 (threshold -9.0))."
+      ],
+      "latency_ms": 783.5,
+      "keyword_recall": null,
+      "correct_refusal": true
+    },
+    {
+      "id": "n04",
+      "question": "Do you match competitor prices?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "I could not find sufficient evidence in the available sources to answer this question.",
+      "cited_sources": [],
+      "insufficient_evidence": true,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [
+        "Document evidence insufficient (best rerank score -11.24 (threshold -9.0))."
+      ],
+      "latency_ms": 876.6,
+      "keyword_recall": null,
+      "correct_refusal": true
+    },
+    {
+      "id": "n05",
+      "question": "Is gift wrapping available?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "I could not find sufficient evidence in the available sources to answer this question.",
+      "cited_sources": [],
+      "insufficient_evidence": true,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [
+        "Document evidence insufficient (best rerank score -9.83 (threshold -9.0))."
+      ],
+      "latency_ms": 774.6,
+      "keyword_recall": null,
+      "correct_refusal": true
+    },
+    {
+      "id": "n06",
+      "question": "Do you ship orders internationally?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "I could not find sufficient evidence in the available sources to answer this question.",
+      "cited_sources": [],
+      "insufficient_evidence": true,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [
+        "Document evidence insufficient (best rerank score -10.19 (threshold -9.0))."
+      ],
+      "latency_ms": 764.0,
+      "keyword_recall": null,
+      "correct_refusal": true
+    },
+    {
+      "id": "n07",
+      "question": "Is there a student discount?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "I could not find sufficient evidence in the available sources to answer this question.",
+      "cited_sources": [],
+      "insufficient_evidence": true,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [
+        "Document evidence insufficient (best rerank score -11.05 (threshold -9.0))."
+      ],
+      "latency_ms": 735.7,
+      "keyword_recall": null,
+      "correct_refusal": true
+    },
+    {
+      "id": "n08",
+      "question": "Are pets allowed inside stores?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "I could not find sufficient evidence in the available sources to answer this question.",
+      "cited_sources": [],
+      "insufficient_evidence": true,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [
+        "Document evidence insufficient (best rerank score -10.98 (threshold -9.0))."
+      ],
+      "latency_ms": 719.8,
+      "keyword_recall": null,
+      "correct_refusal": true
+    },
+    {
+      "id": "n09",
+      "question": "How many employees does the company have?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "I could not find sufficient evidence in the available sources to answer this question.",
+      "cited_sources": [],
+      "insufficient_evidence": true,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [],
+      "latency_ms": 1355.1,
+      "keyword_recall": null,
+      "correct_refusal": true
+    },
+    {
+      "id": "n10",
+      "question": "What dividend did the company pay to shareholders?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "I could not find sufficient evidence in the available sources to answer this question.",
+      "cited_sources": [],
+      "insufficient_evidence": true,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [
+        "Document evidence insufficient (best rerank score -11.08 (threshold -9.0))."
+      ],
+      "latency_ms": 817.1,
+      "keyword_recall": null,
+      "correct_refusal": true
+    },
+    {
+      "id": "n11",
+      "question": "What are the store hours on Black Friday?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "I could not find sufficient evidence in the available sources to answer this question.",
+      "cited_sources": [],
+      "insufficient_evidence": true,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [],
+      "latency_ms": 1429.8,
+      "keyword_recall": null,
+      "correct_refusal": true
+    },
+    {
+      "id": "n12",
+      "question": "Does the company have a store in Winnipeg?",
+      "expected_route": "documents",
+      "route": "sql",
+      "answer": "The company does not have a store in Winnipeg, as indicated by the database result showing \"False\" for the existence of a store in that city [SQL].",
+      "cited_sources": [],
+      "insufficient_evidence": false,
+      "sql_query": "SELECT EXISTS(SELECT 1 FROM stores WHERE city = 'Winnipeg') LIMIT 201",
+      "sql_error": null,
+      "sql_attempts": 1,
+      "warnings": [],
+      "latency_ms": 2134.3,
+      "keyword_recall": null,
+      "numbers_unsupported": [],
+      "correct_refusal": false
+    },
+    {
+      "id": "n13",
+      "question": "What was the CEO's salary in 2025?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "I could not find sufficient evidence in the available sources to answer this question.",
+      "cited_sources": [],
+      "insufficient_evidence": true,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [],
+      "latency_ms": 1495.1,
+      "keyword_recall": null,
+      "correct_refusal": true
+    },
+    {
+      "id": "n14",
+      "question": "How much carbon did the company emit in tonnes in 2023?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "I could not find sufficient evidence in the available sources to answer this question.",
+      "cited_sources": [],
+      "insufficient_evidence": true,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [],
+      "latency_ms": 1426.2,
+      "keyword_recall": null,
+      "correct_refusal": true
+    },
+    {
+      "id": "n15",
+      "question": "Which payment apps are accepted at checkout?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "I could not find sufficient evidence in the available sources to answer this question.",
+      "cited_sources": [],
+      "insufficient_evidence": true,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [
+        "Document evidence insufficient (best rerank score -10.68 (threshold -9.0))."
+      ],
+      "latency_ms": 724.7,
+      "keyword_recall": null,
+      "correct_refusal": true
+    },
+    {
+      "id": "n16",
+      "question": "Can I rent camping equipment?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "I could not find sufficient evidence in the available sources to answer this question.",
+      "cited_sources": [],
+      "insufficient_evidence": true,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [
+        "Document evidence insufficient (best rerank score -9.06 (threshold -9.0))."
+      ],
+      "latency_ms": 852.7,
+      "keyword_recall": null,
+      "correct_refusal": true
+    },
+    {
+      "id": "n17",
+      "question": "What is the warranty on bicycles?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "I could not find sufficient evidence in the available sources to answer this question.",
+      "cited_sources": [],
+      "insufficient_evidence": true,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [
+        "Document evidence insufficient (best rerank score -9.51 (threshold -9.0))."
+      ],
+      "latency_ms": 815.5,
+      "keyword_recall": null,
+      "correct_refusal": true
+    },
+    {
+      "id": "n18",
+      "question": "Do you offer layaway plans?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "I could not find sufficient evidence in the available sources to answer this question.",
+      "cited_sources": [],
+      "insufficient_evidence": true,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [
+        "Document evidence insufficient (best rerank score -11.20 (threshold -9.0))."
+      ],
+      "latency_ms": 759.0,
+      "keyword_recall": null,
+      "correct_refusal": true
+    },
+    {
+      "id": "n19",
+      "question": "What is the dress code for staff?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "I could not find sufficient evidence in the available sources to answer this question.",
+      "cited_sources": [],
+      "insufficient_evidence": true,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [
+        "Document evidence insufficient (best rerank score -11.28 (threshold -9.0))."
+      ],
+      "latency_ms": 881.2,
+      "keyword_recall": null,
+      "correct_refusal": true
+    },
+    {
+      "id": "n20",
+      "question": "Who audits the company's financial statements?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "I could not find sufficient evidence in the available sources to answer this question.",
+      "cited_sources": [],
+      "insufficient_evidence": true,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [
+        "Document evidence insufficient (best rerank score -11.10 (threshold -9.0))."
+      ],
+      "latency_ms": 827.3,
+      "keyword_recall": null,
+      "correct_refusal": true
+    }
+  ],
+  "metrics": {
+    "questions": 40,
+    "errors": 0,
+    "routing_accuracy": 0.9,
+    "sql_execution_success": null,
+    "sql_result_match": null,
+    "answer_mentions_reference_values": null,
+    "keyword_recall": 0.7,
+    "citation_precision": 1.0,
+    "citation_supports_answer": 1.0,
+    "answers_fully_grounded_numbers": 1.0,
+    "refusal_accuracy_unanswerable": 0.95,
+    "false_refusal_rate_answerable": 0.25,
+    "median_latency_ms": 1429.8
+  },
+  "config": {
+    "mode": "full",
+    "timestamp": "2026-11-02T18:52:16",
+    "benchmark_files": [
+      "eval/retrieval_paraphrase.jsonl",
+      "eval/calibration_unanswerable.jsonl"
+    ],
+    "benchmark_items": 40,
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "reranker_model": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+    "llm_model": "gpt-4o-mini",
+    "llm_temperature": 0.0,
+    "repeats": 1,
+    "top_k": 5,
+    "min_rerank_score": -9.0,
+    "git_commit": "c0b43dd",
+    "git_dirty": true,
+    "benchmark_sha256": {
+      "benchmark.jsonl": "5912c81d9e3087e3",
+      "calibration_unanswerable.jsonl": "abbee94946649aa2",
+      "retrieval_paraphrase.jsonl": "ff969f85d18c39a2"
+    },
+    "corpus_sha256": "7dfc95d05bdcc0b6",
+    "python": "3.12.16",
+    "packages": {
+      "langgraph": "1.2.19",
+      "langchain-openai": "1.7.3",
+      "chromadb": "1.5.9",
+      "sentence-transformers": "5.7.0",
+      "rank-bm25": "0.2.2",
+      "sqlglot": "29.0.1"
+    }
+  }
+}
