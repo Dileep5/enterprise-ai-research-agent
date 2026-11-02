@@ -1,0 +1,48 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}
+      POSTGRES_DB: ${POSTGRES_DB:-retail}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-retail}"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  # One-shot job: create schema + demo data + read-only role, then index demo documents.
+  init:
+    build: .
+    env_file: .env
+    environment:
+      DATABASE_ADMIN_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-retail}
+      CHROMA_PATH: /app/storage/chroma
+    command: ["sh", "-c", "python -m scripts.seed_db && python -m scripts.ingest_samples"]
+    volumes:
+      - chroma:/app/storage
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  api:
+    build: .
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql://${READONLY_DB_USER:-agent_readonly}:${READONLY_DB_PASSWORD}@postgres:5432/${POSTGRES_DB:-retail}
+      CHROMA_PATH: /app/storage/chroma
+    ports:
+      - "8000:8000"
+    volumes:
+      - chroma:/app/storage
+    depends_on:
+      init:
+        condition: service_completed_successfully
+
+volumes:
+  pgdata:
+  chroma:

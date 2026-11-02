@@ -1,0 +1,642 @@
+{
+  "per_item": [
+    {
+      "id": "d01",
+      "expected_route": "documents",
+      "heuristic_route": "documents",
+      "answerable": true,
+      "expected_sources": [
+        "return_policy.txt"
+      ],
+      "retrieved_sources": [
+        "return_policy.txt",
+        "return_policy.txt",
+        "return_policy.txt",
+        "loyalty_program.docx",
+        "annual_report_2025.pdf"
+      ],
+      "first_relevant_rank": 1,
+      "evidence_sufficient": true,
+      "evidence_reason": "best dense similarity 0.54 (threshold 0.3)"
+    },
+    {
+      "id": "d02",
+      "expected_route": "documents",
+      "heuristic_route": "documents",
+      "answerable": true,
+      "expected_sources": [
+        "loyalty_program.docx",
+        "return_policy.txt"
+      ],
+      "retrieved_sources": [
+        "return_policy.txt",
+        "loyalty_program.docx",
+        "return_policy.txt",
+        "annual_report_2025.pdf",
+        "return_policy.txt"
+      ],
+      "first_relevant_rank": 1,
+      "evidence_sufficient": true,
+      "evidence_reason": "best dense similarity 0.65 (threshold 0.3)"
+    },
+    {
+      "id": "d03",
+      "expected_route": "documents",
+      "heuristic_route": "documents",
+      "answerable": true,
+      "expected_sources": [
+        "return_policy.txt"
+      ],
+      "retrieved_sources": [
+        "return_policy.txt",
+        "return_policy.txt",
+        "store_operations_handbook.md",
+        "return_policy.txt",
+        "store_operations_handbook.md"
+      ],
+      "first_relevant_rank": 1,
+      "evidence_sufficient": true,
+      "evidence_reason": "best dense similarity 0.57 (threshold 0.3)"
+    },
+    {
+      "id": "d04",
+      "expected_route": "documents",
+      "heuristic_route": "documents",
+      "answerable": true,
+      "expected_sources": [
+        "return_policy.txt"
+      ],
+      "retrieved_sources": [
+        "return_policy.txt",
+        "store_operations_handbook.md",
+        "supplier_directory.csv",
+        "return_policy.txt",
+        "annual_report_2025.pdf"
+      ],
+      "first_relevant_rank": 1,
+      "evidence_sufficient": true,
+      "evidence_reason": "best dense similarity 0.74 (threshold 0.3)"
+    },
+    {
+      "id": "d05",
+      "expected_route": "documents",
+      "heuristic_route": "documents",
+      "answerable": true,
+      "expected_sources": [
+        "return_policy.txt"
+      ],
+      "retrieved_sources": [
+        "return_policy.txt",
+        "return_policy.txt",
+        "store_operations_handbook.md",
+        "loyalty_program.docx",
+        "return_policy.txt"
+      ],
+      "first_relevant_rank": 1,
+      "evidence_sufficient": true,
+      "evidence_reason": "best dense similarity 0.60 (threshold 0.3)"
+    },
+    {
+      "id": "d06",
+      "expected_route": "documents",
+      "heuristic_route": "both",
+      "answerable": true,
+      "expected_sources": [
+        "annual_report_2025.pdf"
+      ],
+      "retrieved_sources": [
+        "annual_report_2025.pdf",
+        "annual_report_2025.pdf",
+        "loyalty_program.docx",
+        "return_policy.txt",
+        "return_policy.txt"
+      ],
+      "first_relevant_rank": 1,
+      "evidence_sufficient": true,
+      "evidence_reason": "best dense similarity 0.62 (threshold 0.3)"
+    },
+    {
+      "id": "d07",
+      "expected_route": "documents",
+      "heuristic_route": "both",
+      "answerable": true,
+      "expected_sources": [
+        "annual_report_2025.pdf"
+      ],
+      "retrieved_sources": [
+        "annual_report_2025.pdf",
+        "annual_report_2025.pdf",
+        "annual_report_2025.pdf",
+        "loyalty_program.docx",
+        "store_operations_handbook.md"
+      ],
+      "first_relevant_rank": 1,
+      "evidence_sufficient": true,
+      "evidence_reason": "best dense similarity 0.60 (threshold 0.3)"
+    },
+    {
+      "id": "d08",
+      "expected_route": "documents",
+      "heuristic_route": "documents",
+      "answerable": true,
+      "expected_sources": [
+        "annual_report_2025.pdf"
+      ],
+      "retrieved_sources": [
+        "annual_report_2025.pdf",
+        "annual_report_2025.pdf",
+        "annual_report_2025.pdf",
+        "store_operations_handbook.md",
+        "return_policy.txt"
+      ],
+      "first_relevant_rank": 1,
+      "evidence_sufficient": true,
+      "evidence_reason": "best dense similarity 0.57 (threshold 0.3)"
+    },
+    {
+      "id": "d09",
+      "expected_route": "documents",
+      "heuristic_route": "documents",
+      "answerable": true,
+      "expected_sources": [
+        "annual_report_2025.pdf"
+      ],
+      "retrieved_sources": [
+        "annual_report_2025.pdf",
+        "return_policy.txt",
+        "supplier_directory.csv",
+        "supplier_directory.csv",
+        "store_operations_handbook.md"
+      ],
+      "first_relevant_rank": 1,
+      "evidence_sufficient": true,
+      "evidence_reason": "best dense similarity 0.51 (threshold 0.3)"
+    },
+    {
+      "id": "d10",
+      "expected_route": "documents",
+      "heuristic_route": "documents",
+      "answerable": true,
+      "expected_sources": [
+        "loyalty_program.docx"
+      ],
+      "retrieved_sources": [
+        "loyalty_program.docx",
+        "loyalty_program.docx",
+        "annual_report_2025.pdf",
+        "return_policy.txt",
+        "supplier_directory.csv"
+      ],
+      "first_relevant_rank": 1,
+      "evidence_sufficient": true,
+      "evidence_reason": "best dense similarity 0.60 (threshold 0.3)"
+    },
+    {
+      "id": "d11",
+      "expected_route": "documents",
+      "heuristic_route": "documents",
+      "answerable": true,
+      "expected_sources": [
+        "loyalty_program.docx"
+      ],
+      "retrieved_sources": [
+        "loyalty_program.docx",
+        "loyalty_program.docx",
+        "annual_report_2025.pdf",
+        "return_policy.txt",
+        "return_policy.txt"
+      ],
+      "first_relevant_rank": 1,
+      "evidence_sufficient": true,
+      "evidence_reason": "best dense similarity 0.62 (threshold 0.3)"
+    },
+    {
+      "id": "d12",
+      "expected_route": "documents",
+      "heuristic_route": "documents",
+      "answerable": true,
+      "expected_sources": [
+        "loyalty_program.docx"
+      ],
+      "retrieved_sources": [
+        "loyalty_program.docx",
+        "loyalty_program.docx",
+        "return_policy.txt",
+        "annual_report_2025.pdf",
+        "return_policy.txt"
+      ],
+      "first_relevant_rank": 1,
+      "evidence_sufficient": true,
+      "evidence_reason": "best dense similarity 0.59 (threshold 0.3)"
+    },
+    {
+      "id": "d13",
+      "expected_route": "documents",
+      "heuristic_route": "documents",
+      "answerable": true,
+      "expected_sources": [
+        "store_operations_handbook.md"
+      ],
+      "retrieved_sources": [
+        "store_operations_handbook.md",
+        "annual_report_2025.pdf",
+        "loyalty_program.docx",
+        "store_operations_handbook.md",
+        "loyalty_program.docx"
+      ],
+      "first_relevant_rank": 1,
+      "evidence_sufficient": true,
+      "evidence_reason": "best dense similarity 0.39 (threshold 0.3)"
+    },
+    {
+      "id": "d14",
+      "expected_route": "documents",
+      "heuristic_route": "documents",
+      "answerable": true,
+      "expected_sources": [
+        "store_operations_handbook.md"
+      ],
+      "retrieved_sources": [
+        "store_operations_handbook.md",
+        "store_operations_handbook.md",
+        "store_operations_handbook.md",
+        "return_policy.txt",
+        "return_policy.txt"
+      ],
+      "first_relevant_rank": 1,
+      "evidence_sufficient": true,
+      "evidence_reason": "best dense similarity 0.75 (threshold 0.3)"
+    },
+    {
+      "id": "d15",
+      "expected_route": "documents",
+      "heuristic_route": "documents",
+      "answerable": true,
+      "expected_sources": [
+        "supplier_directory.csv"
+      ],
+      "retrieved_sources": [
+        "supplier_directory.csv",
+        "supplier_directory.csv",
+        "return_policy.txt",
+        "store_operations_handbook.md",
+        "store_operations_handbook.md"
+      ],
+      "first_relevant_rank": 1,
+      "evidence_sufficient": true,
+      "evidence_reason": "best dense similarity 0.50 (threshold 0.3)"
+    },
+    {
+      "id": "d16",
+      "expected_route": "documents",
+      "heuristic_route": "documents",
+      "answerable": true,
+      "expected_sources": [
+        "supplier_directory.csv"
+      ],
+      "retrieved_sources": [
+        "supplier_directory.csv",
+        "supplier_directory.csv",
+        "return_policy.txt",
+        "store_operations_handbook.md",
+        "loyalty_program.docx"
+      ],
+      "first_relevant_rank": 1,
+      "evidence_sufficient": true,
+      "evidence_reason": "best dense similarity 0.54 (threshold 0.3)"
+    },
+    {
+      "id": "s01",
+      "expected_route": "sql",
+      "heuristic_route": "sql",
+      "answerable": true,
+      "expected_sources": [],
+      "retrieved_sources": [
+        "annual_report_2025.pdf",
+        "return_policy.txt",
+        "loyalty_program.docx",
+        "store_operations_handbook.md",
+        "store_operations_handbook.md"
+      ],
+      "first_relevant_rank": null,
+      "evidence_sufficient": false,
+      "evidence_reason": "best dense similarity 0.26 (threshold 0.3)"
+    },
+    {
+      "id": "s02",
+      "expected_route": "sql",
+      "heuristic_route": "sql",
+      "answerable": true,
+      "expected_sources": [],
+      "retrieved_sources": [
+        "annual_report_2025.pdf",
+        "annual_report_2025.pdf",
+        "annual_report_2025.pdf",
+        "return_policy.txt",
+        "loyalty_program.docx"
+      ],
+      "first_relevant_rank": null,
+      "evidence_sufficient": true,
+      "evidence_reason": "best dense similarity 0.38 (threshold 0.3)"
+    },
+    {
+      "id": "s03",
+      "expected_route": "sql",
+      "heuristic_route": "sql",
+      "answerable": true,
+      "expected_sources": [],
+      "retrieved_sources": [
+        "annual_report_2025.pdf",
+        "store_operations_handbook.md",
+        "annual_report_2025.pdf",
+        "return_policy.txt",
+        "annual_report_2025.pdf"
+      ],
+      "first_relevant_rank": null,
+      "evidence_sufficient": true,
+      "evidence_reason": "best dense similarity 0.33 (threshold 0.3)"
+    },
+    {
+      "id": "s04",
+      "expected_route": "sql",
+      "heuristic_route": "sql",
+      "answerable": true,
+      "expected_sources": [],
+      "retrieved_sources": [
+        "annual_report_2025.pdf",
+        "loyalty_program.docx",
+        "loyalty_program.docx",
+        "return_policy.txt",
+        "supplier_directory.csv"
+      ],
+      "first_relevant_rank": null,
+      "evidence_sufficient": true,
+      "evidence_reason": "best dense similarity 0.57 (threshold 0.3)"
+    },
+    {
+      "id": "s05",
+      "expected_route": "sql",
+      "heuristic_route": "sql",
+      "answerable": true,
+      "expected_sources": [],
+      "retrieved_sources": [
+        "annual_report_2025.pdf",
+        "annual_report_2025.pdf",
+        "store_operations_handbook.md",
+        "store_operations_handbook.md",
+        "loyalty_program.docx"
+      ],
+      "first_relevant_rank": null,
+      "evidence_sufficient": true,
+      "evidence_reason": "best dense similarity 0.31 (threshold 0.3)"
+    },
+    {
+      "id": "s06",
+      "expected_route": "sql",
+      "heuristic_route": "sql",
+      "answerable": true,
+      "expected_sources": [],
+      "retrieved_sources": [
+        "return_policy.txt",
+        "return_policy.txt",
+        "loyalty_program.docx",
+        "loyalty_program.docx",
+        "return_policy.txt"
+      ],
+      "first_relevant_rank": null,
+      "evidence_sufficient": true,
+      "evidence_reason": "best dense similarity 0.45 (threshold 0.3)"
+    },
+    {
+      "id": "s07",
+      "expected_route": "sql",
+      "heuristic_route": "sql",
+      "answerable": true,
+      "expected_sources": [],
+      "retrieved_sources": [
+        "store_operations_handbook.md",
+        "store_operations_handbook.md",
+        "return_policy.txt",
+        "return_policy.txt",
+        "annual_report_2025.pdf"
+      ],
+      "first_relevant_rank": null,
+      "evidence_sufficient": false,
+      "evidence_reason": "best dense similarity 0.29 (threshold 0.3)"
+    },
+    {
+      "id": "s08",
+      "expected_route": "sql",
+      "heuristic_route": "sql",
+      "answerable": true,
+      "expected_sources": [],
+      "retrieved_sources": [
+        "store_operations_handbook.md",
+        "store_operations_handbook.md",
+        "annual_report_2025.pdf",
+        "return_policy.txt",
+        "loyalty_program.docx"
+      ],
+      "first_relevant_rank": null,
+      "evidence_sufficient": true,
+      "evidence_reason": "best dense similarity 0.42 (threshold 0.3)"
+    },
+    {
+      "id": "s09",
+      "expected_route": "sql",
+      "heuristic_route": "sql",
+      "answerable": true,
+      "expected_sources": [],
+      "retrieved_sources": [
+        "annual_report_2025.pdf",
+        "store_operations_handbook.md",
+        "annual_report_2025.pdf",
+        "store_operations_handbook.md",
+        "return_policy.txt"
+      ],
+      "first_relevant_rank": null,
+      "evidence_sufficient": true,
+      "evidence_reason": "best dense similarity 0.42 (threshold 0.3)"
+    },
+    {
+      "id": "s10",
+      "expected_route": "sql",
+      "heuristic_route": "sql",
+      "answerable": true,
+      "expected_sources": [],
+      "retrieved_sources": [
+        "annual_report_2025.pdf",
+        "annual_report_2025.pdf",
+        "annual_report_2025.pdf",
+        "loyalty_program.docx",
+        "return_policy.txt"
+      ],
+      "first_relevant_rank": null,
+      "evidence_sufficient": true,
+      "evidence_reason": "best dense similarity 0.36 (threshold 0.3)"
+    },
+    {
+      "id": "b01",
+      "expected_route": "both",
+      "heuristic_route": "both",
+      "answerable": true,
+      "expected_sources": [
+        "annual_report_2025.pdf"
+      ],
+      "retrieved_sources": [
+        "annual_report_2025.pdf",
+        "annual_report_2025.pdf",
+        "annual_report_2025.pdf",
+        "store_operations_handbook.md",
+        "loyalty_program.docx"
+      ],
+      "first_relevant_rank": 1,
+      "evidence_sufficient": true,
+      "evidence_reason": "best dense similarity 0.51 (threshold 0.3)"
+    },
+    {
+      "id": "b02",
+      "expected_route": "both",
+      "heuristic_route": "documents",
+      "answerable": true,
+      "expected_sources": [
+        "store_operations_handbook.md"
+      ],
+      "retrieved_sources": [
+        "store_operations_handbook.md",
+        "store_operations_handbook.md",
+        "return_policy.txt",
+        "return_policy.txt",
+        "store_operations_handbook.md"
+      ],
+      "first_relevant_rank": 1,
+      "evidence_sufficient": true,
+      "evidence_reason": "best dense similarity 0.41 (threshold 0.3)"
+    },
+    {
+      "id": "b03",
+      "expected_route": "both",
+      "heuristic_route": "both",
+      "answerable": true,
+      "expected_sources": [
+        "loyalty_program.docx",
+        "return_policy.txt"
+      ],
+      "retrieved_sources": [
+        "loyalty_program.docx",
+        "annual_report_2025.pdf",
+        "return_policy.txt",
+        "loyalty_program.docx",
+        "return_policy.txt"
+      ],
+      "first_relevant_rank": 1,
+      "evidence_sufficient": true,
+      "evidence_reason": "best dense similarity 0.46 (threshold 0.3)"
+    },
+    {
+      "id": "b04",
+      "expected_route": "both",
+      "heuristic_route": "both",
+      "answerable": true,
+      "expected_sources": [
+        "annual_report_2025.pdf"
+      ],
+      "retrieved_sources": [
+        "annual_report_2025.pdf",
+        "store_operations_handbook.md",
+        "annual_report_2025.pdf",
+        "supplier_directory.csv",
+        "loyalty_program.docx"
+      ],
+      "first_relevant_rank": 1,
+      "evidence_sufficient": true,
+      "evidence_reason": "best dense similarity 0.36 (threshold 0.3)"
+    },
+    {
+      "id": "u01",
+      "expected_route": "documents",
+      "heuristic_route": "documents",
+      "answerable": false,
+      "expected_sources": [],
+      "retrieved_sources": [
+        "store_operations_handbook.md",
+        "return_policy.txt",
+        "store_operations_handbook.md",
+        "store_operations_handbook.md",
+        "return_policy.txt"
+      ],
+      "first_relevant_rank": null,
+      "evidence_sufficient": false,
+      "evidence_reason": "best dense similarity 0.28 (threshold 0.3)"
+    },
+    {
+      "id": "u02",
+      "expected_route": "documents",
+      "heuristic_route": "documents",
+      "answerable": false,
+      "expected_sources": [],
+      "retrieved_sources": [
+        "return_policy.txt",
+        "loyalty_program.docx",
+        "annual_report_2025.pdf",
+        "store_operations_handbook.md",
+        "annual_report_2025.pdf"
+      ],
+      "first_relevant_rank": null,
+      "evidence_sufficient": true,
+      "evidence_reason": "best dense similarity 0.36 (threshold 0.3)"
+    },
+    {
+      "id": "u03",
+      "expected_route": "documents",
+      "heuristic_route": "documents",
+      "answerable": false,
+      "expected_sources": [],
+      "retrieved_sources": [
+        "supplier_directory.csv",
+        "supplier_directory.csv",
+        "annual_report_2025.pdf",
+        "annual_report_2025.pdf",
+        "loyalty_program.docx"
+      ],
+      "first_relevant_rank": null,
+      "evidence_sufficient": false,
+      "evidence_reason": "best dense similarity 0.13 (threshold 0.3)"
+    },
+    {
+      "id": "u04",
+      "expected_route": "documents",
+      "heuristic_route": "documents",
+      "answerable": false,
+      "expected_sources": [],
+      "retrieved_sources": [
+        "annual_report_2025.pdf",
+        "supplier_directory.csv",
+        "annual_report_2025.pdf",
+        "store_operations_handbook.md",
+        "annual_report_2025.pdf"
+      ],
+      "first_relevant_rank": null,
+      "evidence_sufficient": false,
+      "evidence_reason": "best dense similarity 0.22 (threshold 0.3)"
+    }
+  ],
+  "metrics": {
+    "heuristic_routing_accuracy": 0.9118,
+    "retrieval_questions": 20,
+    "hit_at_1": 1.0,
+    "hit_at_5": 1.0,
+    "mrr": 1.0,
+    "evidence_gate_pass_rate_answerable": 1.0,
+    "evidence_gate_reject_rate_unanswerable": 0.75
+  },
+  "config": {
+    "mode": "retrieval",
+    "timestamp": "2026-11-02T17:52:23",
+    "benchmark_items": 34,
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "reranker_model": null,
+    "llm_model": null,
+    "top_k": 5
+  }
+}

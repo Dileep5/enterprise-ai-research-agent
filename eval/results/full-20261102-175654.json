@@ -1,0 +1,739 @@
+{
+  "per_item": [
+    {
+      "id": "d01",
+      "question": "What is the standard return window for merchandise?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "The standard return window for merchandise is 45 days from the date of purchase, provided the customer has a receipt or order number, and the items are in original condition with tags attached [1]. \n\nThe evidence does not cover any additional details regarding exceptions or specific conditions for returns beyond the standard policy.",
+      "cited_sources": [
+        "return_policy.txt"
+      ],
+      "insufficient_evidence": false,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [],
+      "latency_ms": 4104.9,
+      "keyword_recall": 1.0,
+      "citation_precision": 1.0
+    },
+    {
+      "id": "d02",
+      "question": "How long do Gold loyalty members have to return items?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "Gold loyalty members have an extended return window of 60 days to return items [1][2]. The evidence does not cover any additional details regarding the return process or exceptions for Gold members.",
+      "cited_sources": [
+        "return_policy.txt",
+        "loyalty_program.docx"
+      ],
+      "insufficient_evidence": false,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [],
+      "latency_ms": 1725.5,
+      "keyword_recall": 1.0,
+      "citation_precision": 1.0
+    },
+    {
+      "id": "d03",
+      "question": "Within how many days must electronics be returned?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "Electronics must be returned within 30 days and must include all accessories and original packaging [1]. \n\nThe evidence does not cover any additional details regarding exceptions or conditions for returning electronics beyond the 30-day timeframe.",
+      "cited_sources": [
+        "return_policy.txt"
+      ],
+      "insufficient_evidence": false,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [],
+      "latency_ms": 1969.9,
+      "keyword_recall": 1.0,
+      "citation_precision": 1.0
+    },
+    {
+      "id": "d04",
+      "question": "What restocking fee applies to opened tents returned after 14 days?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "A 15% restocking fee applies to opened tents returned after 14 days [1]. \n\nThe evidence does not cover any additional details regarding the conditions or exceptions related to this restocking fee.",
+      "cited_sources": [
+        "return_policy.txt"
+      ],
+      "insufficient_evidence": false,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [],
+      "latency_ms": 2220.0,
+      "keyword_recall": 1.0,
+      "citation_precision": 1.0
+    },
+    {
+      "id": "d05",
+      "question": "How quickly are card refunds processed after a return is received?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "Card refunds are processed within 5 to 7 business days after the return is received [1]. \n\nThe evidence does not cover any additional details regarding the conditions or exceptions related to the processing time for card refunds.",
+      "cited_sources": [
+        "return_policy.txt"
+      ],
+      "insufficient_evidence": false,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [],
+      "latency_ms": 1619.7,
+      "keyword_recall": 1.0,
+      "citation_precision": 1.0
+    },
+    {
+      "id": "d06",
+      "question": "What net revenue did Maple Ridge report for fiscal 2025 in the annual report?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "Maple Ridge reported net revenue of CAD 48.2 million for fiscal 2025, which represents an increase of 12% over fiscal 2024 [1]. \n\nThe evidence does not cover any details about fiscal 2024's net revenue.",
+      "cited_sources": [
+        "annual_report_2025.pdf"
+      ],
+      "insufficient_evidence": false,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [],
+      "latency_ms": 2698.8,
+      "keyword_recall": 1.0,
+      "citation_precision": 1.0
+    },
+    {
+      "id": "d07",
+      "question": "According to the annual report, what share of revenue came from e-commerce in fiscal 2025?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "E-commerce represented 31% of total revenue in fiscal 2025, compared with 27% in fiscal 2024 [1]. \n\nThe evidence does not cover any additional details regarding the overall revenue or other sources of revenue.",
+      "cited_sources": [
+        "annual_report_2025.pdf"
+      ],
+      "insufficient_evidence": false,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [],
+      "latency_ms": 2041.8,
+      "keyword_recall": 1.0,
+      "citation_precision": 1.0
+    },
+    {
+      "id": "d08",
+      "question": "What was the Net Promoter Score in fiscal 2025?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "The Net Promoter Score in fiscal 2025 was 58, having risen from 52 in the previous fiscal year [1]. \n\nThe evidence does not cover any additional details about the Net Promoter Score beyond this value.",
+      "cited_sources": [
+        "annual_report_2025.pdf"
+      ],
+      "insufficient_evidence": false,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [],
+      "latency_ms": 1801.9,
+      "keyword_recall": 1.0,
+      "citation_precision": 1.0
+    },
+    {
+      "id": "d09",
+      "question": "What carbon emission reduction target has the company set?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "The company has set a carbon emission reduction target to reduce Scope 1 and 2 carbon emissions by 18% by the end of fiscal 2027 against a fiscal 2023 baseline [1]. \n\nThe evidence does not cover any additional details regarding other targets or specific strategies beyond this reduction goal.",
+      "cited_sources": [
+        "annual_report_2025.pdf"
+      ],
+      "insufficient_evidence": false,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [],
+      "latency_ms": 1896.9,
+      "keyword_recall": 1.0,
+      "citation_precision": 1.0
+    },
+    {
+      "id": "d10",
+      "question": "How much qualifying spend is needed to reach the Gold tier of the loyalty program?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "To reach the Gold tier of the loyalty program, a member needs CAD 1,500 in qualifying spend within a calendar year [1][3]. \n\nThe evidence does not cover any additional details regarding the benefits or requirements beyond the qualifying spend amount.",
+      "cited_sources": [
+        "loyalty_program.docx",
+        "loyalty_program.docx"
+      ],
+      "insufficient_evidence": false,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [],
+      "latency_ms": 2086.2,
+      "keyword_recall": 1.0,
+      "citation_precision": 1.0
+    },
+    {
+      "id": "d11",
+      "question": "How many loyalty points per dollar do Gold members earn?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "Gold members earn 2 points per dollar spent [1][3]. \n\nThe evidence does not cover any additional details regarding the loyalty points system beyond this specific information.",
+      "cited_sources": [
+        "loyalty_program.docx",
+        "loyalty_program.docx"
+      ],
+      "insufficient_evidence": false,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [],
+      "latency_ms": 1598.0,
+      "keyword_recall": 1.0,
+      "citation_precision": 1.0
+    },
+    {
+      "id": "d12",
+      "question": "When do loyalty points expire?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "Loyalty points expire 18 months after they are earned if the account has no qualifying purchase in that period [1]. \n\nThe evidence does not cover any additional details regarding exceptions or specific conditions under which points may not expire.",
+      "cited_sources": [
+        "loyalty_program.docx"
+      ],
+      "insufficient_evidence": false,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [],
+      "latency_ms": 1877.8,
+      "keyword_recall": 1.0,
+      "citation_precision": 1.0
+    },
+    {
+      "id": "d13",
+      "question": "According to the handbook, when are weekly cycle counts performed?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "Weekly cycle counts are performed every Monday before opening, covering at least 20% of active SKUs so that every SKU is counted at least once every five weeks [1]. \n\nThe evidence does not cover any additional details regarding the frequency or specific procedures beyond what is stated.",
+      "cited_sources": [
+        "store_operations_handbook.md"
+      ],
+      "insufficient_evidence": false,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [],
+      "latency_ms": 2008.4,
+      "keyword_recall": 1.0,
+      "citation_precision": 1.0
+    },
+    {
+      "id": "d14",
+      "question": "Within how many hours must stock-outs of top-20 SKUs be escalated?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "Stock-outs of top-20 SKUs must be escalated to the regional inventory planner within 24 hours [1]. \n\nThe evidence does not cover any additional details regarding the escalation process or consequences of not escalating within that timeframe.",
+      "cited_sources": [
+        "store_operations_handbook.md"
+      ],
+      "insufficient_evidence": false,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [],
+      "latency_ms": 1865.1,
+      "keyword_recall": 1.0,
+      "citation_precision": 1.0
+    },
+    {
+      "id": "d15",
+      "question": "Which supplier has the longest lead time?",
+      "expected_route": "documents",
+      "route": "sql",
+      "answer": "The supplier with the longest lead time is TrailTech Electronics, with a lead time of 60 days [1]. \n\nThe evidence does not cover any additional suppliers or their lead times beyond what is provided.",
+      "cited_sources": [
+        "supplier_directory.csv"
+      ],
+      "insufficient_evidence": false,
+      "sql_query": "SELECT NULL AS supplier, NULL AS lead_time LIMIT 201",
+      "sql_error": null,
+      "sql_attempts": 1,
+      "warnings": [],
+      "latency_ms": 2517.4,
+      "keyword_recall": 1.0,
+      "citation_precision": 1.0
+    },
+    {
+      "id": "d16",
+      "question": "Which supplier provides tents and in which country is it based?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "The supplier that provides tents is Boreal Shelter Works, and it is based in Canada [1]. \n\nThe evidence does not cover any additional suppliers that provide tents or any other details about them.",
+      "cited_sources": [
+        "supplier_directory.csv"
+      ],
+      "insufficient_evidence": false,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [],
+      "latency_ms": 1657.9,
+      "keyword_recall": 1.0,
+      "citation_precision": 1.0
+    },
+    {
+      "id": "s01",
+      "question": "How many orders are in the database in total?",
+      "expected_route": "sql",
+      "route": "sql",
+      "answer": "The total number of orders in the database is 2500 [SQL].",
+      "cited_sources": [],
+      "insufficient_evidence": false,
+      "sql_query": "SELECT COUNT(*) AS total_orders FROM orders LIMIT 201",
+      "sql_error": null,
+      "sql_attempts": 1,
+      "warnings": [],
+      "latency_ms": 1838.0,
+      "keyword_recall": null,
+      "reference_rows": [
+        [
+          2500
+        ]
+      ],
+      "sql_executed": true,
+      "sql_result_match": true,
+      "answer_mentions_reference_values": true
+    },
+    {
+      "id": "s02",
+      "question": "What was total revenue from completed orders in 2025?",
+      "expected_route": "sql",
+      "route": "sql",
+      "answer": "The total revenue from completed orders in 2025 was $992,924.96 [SQL].",
+      "cited_sources": [],
+      "insufficient_evidence": false,
+      "sql_query": "SELECT ROUND(SUM(oi.quantity * oi.unit_price * (1 - oi.discount_pct / 100)), 2) AS total_revenue FROM order_items AS oi JOIN orders AS o ON oi.order_id = o.order_id WHERE o.status = 'completed' AND EXTRACT(YEAR FROM o.order_date) = 2025 LIMIT 201",
+      "sql_error": null,
+      "sql_attempts": 1,
+      "warnings": [],
+      "latency_ms": 2642.3,
+      "keyword_recall": null,
+      "reference_rows": [
+        [
+          992924.96
+        ]
+      ],
+      "sql_executed": true,
+      "sql_result_match": true,
+      "answer_mentions_reference_values": true
+    },
+    {
+      "id": "s03",
+      "question": "Which store had the highest revenue from completed orders?",
+      "expected_route": "sql",
+      "route": "sql",
+      "answer": "The store with the highest revenue from completed orders is \"Maple Ridge Vancouver Kitsilano,\" with a total revenue of $413,753.89 [SQL].",
+      "cited_sources": [],
+      "insufficient_evidence": false,
+      "sql_query": "SELECT s.store_name, ROUND(SUM(oi.quantity * oi.unit_price * (1 - oi.discount_pct / 100)), 2) AS total_revenue FROM stores AS s JOIN orders AS o ON s.store_id = o.store_id JOIN order_items AS oi ON o.order_id = oi.order_id WHERE o.status = 'completed' GROUP BY s.store_name ORDER BY total_revenue DESC LIMIT 1",
+      "sql_error": null,
+      "sql_attempts": 1,
+      "warnings": [],
+      "latency_ms": 2561.6,
+      "keyword_recall": null,
+      "reference_rows": [
+        [
+          "Maple Ridge Vancouver Kitsilano"
+        ]
+      ],
+      "sql_executed": true,
+      "sql_result_match": true,
+      "answer_mentions_reference_values": true
+    },
+    {
+      "id": "s04",
+      "question": "How many customers are in the Gold loyalty tier?",
+      "expected_route": "sql",
+      "route": "sql",
+      "answer": "There are 44 customers in the Gold loyalty tier [SQL].",
+      "cited_sources": [],
+      "insufficient_evidence": false,
+      "sql_query": "SELECT COUNT(*) AS gold_loyalty_customers FROM customers WHERE loyalty_tier = 'Gold' LIMIT 201",
+      "sql_error": null,
+      "sql_attempts": 1,
+      "warnings": [],
+      "latency_ms": 2159.6,
+      "keyword_recall": null,
+      "reference_rows": [
+        [
+          44
+        ]
+      ],
+      "sql_executed": true,
+      "sql_result_match": true,
+      "answer_mentions_reference_values": true
+    },
+    {
+      "id": "s05",
+      "question": "What are the top 3 product categories by units sold in completed orders?",
+      "expected_route": "sql",
+      "route": "sql",
+      "answer": "The top 3 product categories by units sold in completed orders are:\n\n1. Tents - 1674 units sold\n2. Sleeping Bags - 1665 units sold\n3. Footwear - 1596 units sold [SQL].",
+      "cited_sources": [],
+      "insufficient_evidence": false,
+      "sql_query": "SELECT p.category AS product_category, SUM(oi.quantity) AS total_units_sold FROM order_items AS oi JOIN orders AS o ON oi.order_id = o.order_id JOIN products AS p ON oi.product_id = p.product_id WHERE o.status = 'completed' GROUP BY p.category ORDER BY total_units_sold DESC LIMIT 3",
+      "sql_error": null,
+      "sql_attempts": 1,
+      "warnings": [],
+      "latency_ms": 2926.7,
+      "keyword_recall": null,
+      "reference_rows": [
+        [
+          "Tents"
+        ],
+        [
+          "Sleeping Bags"
+        ],
+        [
+          "Footwear"
+        ]
+      ],
+      "sql_executed": true,
+      "sql_result_match": true,
+      "answer_mentions_reference_values": true
+    },
+    {
+      "id": "s06",
+      "question": "How many orders have a status of returned?",
+      "expected_route": "sql",
+      "route": "sql",
+      "answer": "There are 209 orders that have a status of returned [SQL].",
+      "cited_sources": [],
+      "insufficient_evidence": false,
+      "sql_query": "SELECT COUNT(*) AS returned_order_count FROM orders WHERE status = 'returned' LIMIT 201",
+      "sql_error": null,
+      "sql_attempts": 1,
+      "warnings": [],
+      "latency_ms": 2103.6,
+      "keyword_recall": null,
+      "reference_rows": [
+        [
+          209
+        ]
+      ],
+      "sql_executed": true,
+      "sql_result_match": true,
+      "answer_mentions_reference_values": true
+    },
+    {
+      "id": "s07",
+      "question": "What is the average order value of completed orders?",
+      "expected_route": "sql",
+      "route": "sql",
+      "answer": "The average order value of completed orders is 1009.27 [SQL].",
+      "cited_sources": [],
+      "insufficient_evidence": false,
+      "sql_query": "SELECT ROUND(CAST(AVG(order_value) AS DECIMAL), 2) AS average_order_value FROM (SELECT SUM(oi.quantity * oi.unit_price * (1 - oi.discount_pct / 100)) AS order_value FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id WHERE o.status = 'completed' GROUP BY o.order_id) AS order_totals LIMIT 201",
+      "sql_error": null,
+      "sql_attempts": 1,
+      "warnings": [],
+      "latency_ms": 2546.8,
+      "keyword_recall": null,
+      "reference_rows": [
+        [
+          1009.27
+        ]
+      ],
+      "sql_executed": true,
+      "sql_result_match": true,
+      "answer_mentions_reference_values": true
+    },
+    {
+      "id": "s08",
+      "question": "How many store and product combinations in inventory are below their reorder point?",
+      "expected_route": "sql",
+      "route": "sql",
+      "answer": "There are 40 store and product combinations in inventory that are below their reorder point [SQL].",
+      "cited_sources": [],
+      "insufficient_evidence": false,
+      "sql_query": "SELECT COUNT(*) AS store_product_combinations_below_reorder_point FROM inventory WHERE quantity_on_hand < reorder_point LIMIT 201",
+      "sql_error": null,
+      "sql_attempts": 1,
+      "warnings": [],
+      "latency_ms": 2170.3,
+      "keyword_recall": null,
+      "reference_rows": [
+        [
+          40
+        ]
+      ],
+      "sql_executed": true,
+      "sql_result_match": true,
+      "answer_mentions_reference_values": true
+    },
+    {
+      "id": "s09",
+      "question": "What percentage of completed orders in 2025 were placed online?",
+      "expected_route": "sql",
+      "route": "sql",
+      "answer": "In 2025, 30.68% of completed orders were placed online [SQL]. The evidence does not cover any additional details beyond this percentage.",
+      "cited_sources": [],
+      "insufficient_evidence": false,
+      "sql_query": "SELECT ROUND(CAST(COUNT(CASE WHEN channel = 'online' THEN 1 END) * 100.0 / COUNT(*) AS DECIMAL), 2) AS online_order_percentage FROM orders WHERE status = 'completed' AND EXTRACT(YEAR FROM order_date) = 2025 LIMIT 201",
+      "sql_error": null,
+      "sql_attempts": 1,
+      "warnings": [],
+      "latency_ms": 2388.6,
+      "keyword_recall": null,
+      "reference_rows": [
+        [
+          30.68
+        ]
+      ],
+      "sql_executed": true,
+      "sql_result_match": true,
+      "answer_mentions_reference_values": true
+    },
+    {
+      "id": "s10",
+      "question": "What was the monthly revenue from completed orders in January, February and March 2025?",
+      "expected_route": "sql",
+      "route": "sql",
+      "answer": "The monthly revenue from completed orders in January, February, and March 2025 was as follows:\n- January 2025: $102,318.27 [SQL]\n- February 2025: $102,004.14 [SQL]\n- March 2025: $102,502.38 [SQL]",
+      "cited_sources": [],
+      "insufficient_evidence": false,
+      "sql_query": "SELECT DATE_TRUNC('MONTH', o.order_date) AS month, ROUND(SUM(oi.quantity * oi.unit_price * (1 - oi.discount_pct / 100)), 2) AS total_revenue FROM orders AS o JOIN order_items AS oi ON o.order_id = oi.order_id WHERE o.status = 'completed' AND o.order_date >= '2025-01-01' AND o.order_date < '2025-04-01' GROUP BY month ORDER BY month LIMIT 201",
+      "sql_error": null,
+      "sql_attempts": 1,
+      "warnings": [],
+      "latency_ms": 3197.7,
+      "keyword_recall": null,
+      "reference_rows": [
+        [
+          102318.27
+        ],
+        [
+          102004.14
+        ],
+        [
+          102502.38
+        ]
+      ],
+      "sql_executed": true,
+      "sql_result_match": true,
+      "answer_mentions_reference_values": true
+    },
+    {
+      "id": "b01",
+      "question": "Compare the percentage of completed 2025 orders placed online in our database with the e-commerce revenue share stated in the annual report.",
+      "expected_route": "both",
+      "route": "both",
+      "answer": "The percentage of completed 2025 orders placed online in our database is 31.03% [SQL]. The e-commerce revenue share stated in the annual report for fiscal 2025 is 31% [1]. \n\nThus, the comparison shows that the percentage of completed online orders (31.03%) is slightly higher than the e-commerce revenue share (31%). \n\nThe evidence does not cover any additional context or implications of this comparison.",
+      "cited_sources": [
+        "annual_report_2025.pdf"
+      ],
+      "insufficient_evidence": false,
+      "sql_query": "WITH completed_orders AS (SELECT SUM(order_items.quantity * order_items.unit_price * (1 - order_items.discount_pct / 100)) AS total_revenue FROM orders JOIN order_items ON orders.order_id = order_items.order_id WHERE orders.status = 'completed' AND orders.order_date >= '2025-01-01' AND orders.order_date < '2026-01-01' AND orders.channel = 'online'), total_revenue AS (SELECT SUM(order_items.quantity * order_items.unit_price * (1 - order_items.discount_pct / 100)) AS total_revenue FROM orders JOIN order_items ON orders.order_id = order_items.order_id WHERE orders.status = 'completed' AND orders.order_date >= '2025-01-01' AND orders.order_date < '2026-01-01') SELECT ROUND((completed_orders.total_revenue / total_revenue.total_revenue) * 100, 2) AS online_revenue_percentage FROM completed_orders, total_revenue LIMIT 201",
+      "sql_error": null,
+      "sql_attempts": 1,
+      "warnings": [],
+      "latency_ms": 4758.3,
+      "keyword_recall": 1.0,
+      "citation_precision": 1.0,
+      "reference_rows": [
+        [
+          30.68
+        ]
+      ],
+      "sql_executed": true,
+      "sql_result_match": false,
+      "answer_mentions_reference_values": false
+    },
+    {
+      "id": "b02",
+      "question": "The store handbook explains when products must be reordered; how many store-product combinations in inventory currently meet that reorder condition?",
+      "expected_route": "both",
+      "route": "both",
+      "answer": "The store handbook explains that a product must be reordered when its quantity on hand falls below its reorder point [1]. According to the database results, there are currently 40 store-product combinations in inventory that meet the reorder condition [SQL]. \n\nThe evidence does not cover any additional details about the specific products or stores involved.",
+      "cited_sources": [
+        "store_operations_handbook.md"
+      ],
+      "insufficient_evidence": false,
+      "sql_query": "SELECT COUNT(*) AS store_product_combinations_meeting_reorder_condition FROM inventory WHERE quantity_on_hand < reorder_point LIMIT 201",
+      "sql_error": null,
+      "sql_attempts": 1,
+      "warnings": [],
+      "latency_ms": 2589.5,
+      "keyword_recall": null,
+      "citation_precision": 1.0,
+      "reference_rows": [
+        [
+          40
+        ]
+      ],
+      "sql_executed": true,
+      "sql_result_match": true,
+      "answer_mentions_reference_values": true
+    },
+    {
+      "id": "b03",
+      "question": "How many Gold tier customers are in the database, and what return window does the return policy give them?",
+      "expected_route": "both",
+      "route": "both",
+      "answer": "There are 44 Gold tier customers in the database [SQL]. Gold tier loyalty members receive an extended return window of 60 days [1][3].",
+      "cited_sources": [
+        "return_policy.txt",
+        "loyalty_program.docx"
+      ],
+      "insufficient_evidence": false,
+      "sql_query": "SELECT COUNT(*) AS gold_tier_customer_count FROM customers WHERE loyalty_tier = 'Gold' LIMIT 201",
+      "sql_error": null,
+      "sql_attempts": 1,
+      "warnings": [],
+      "latency_ms": 2807.1,
+      "keyword_recall": 1.0,
+      "citation_precision": 1.0,
+      "reference_rows": [
+        [
+          44
+        ]
+      ],
+      "sql_executed": true,
+      "sql_result_match": true,
+      "answer_mentions_reference_values": true
+    },
+    {
+      "id": "b04",
+      "question": "Which stores in the database opened in 2025, and does that match the new stores named in the annual report?",
+      "expected_route": "both",
+      "route": "both",
+      "answer": "The stores that opened in 2025, according to the database, are:\n\n1. Maple Ridge Kelowna in Kelowna, BC\n2. Maple Ridge Halifax Waterfront in Halifax, NS [SQL].\n\nThis matches the new stores named in the annual report, which also lists the opening of a store in Kelowna, British Columbia in March and a store in Halifax, Nova Scotia in October [1]. \n\nThus, both parts of the question are covered: the stores that opened in 2025 and their match with the annual report.",
+      "cited_sources": [
+        "annual_report_2025.pdf"
+      ],
+      "insufficient_evidence": false,
+      "sql_query": "SELECT store_name, city, province FROM stores WHERE opened_date >= '2025-01-01' AND opened_date < '2026-01-01' LIMIT 201",
+      "sql_error": null,
+      "sql_attempts": 1,
+      "warnings": [],
+      "latency_ms": 3703.5,
+      "keyword_recall": 1.0,
+      "citation_precision": 1.0,
+      "reference_rows": [
+        [
+          "Kelowna"
+        ],
+        [
+          "Halifax"
+        ]
+      ],
+      "sql_executed": true,
+      "sql_result_match": true,
+      "answer_mentions_reference_values": true
+    },
+    {
+      "id": "u01",
+      "question": "What is the parental leave policy for store employees?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "I could not find sufficient evidence in the available sources to answer this question.",
+      "cited_sources": [],
+      "insufficient_evidence": true,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [
+        "Document evidence insufficient (best rerank score -8.66 (threshold -3.0))."
+      ],
+      "latency_ms": 784.3,
+      "keyword_recall": null,
+      "correct_refusal": true
+    },
+    {
+      "id": "u02",
+      "question": "What discount do employees receive on merchandise?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "I could not find sufficient evidence in the available sources to answer this question.",
+      "cited_sources": [],
+      "insufficient_evidence": true,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [
+        "Document evidence insufficient (best rerank score -8.27 (threshold -3.0))."
+      ],
+      "latency_ms": 655.2,
+      "keyword_recall": null,
+      "correct_refusal": true
+    },
+    {
+      "id": "u03",
+      "question": "What is the capital city of Australia?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "I could not find sufficient evidence in the available sources to answer this question.",
+      "cited_sources": [],
+      "insufficient_evidence": true,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [
+        "Document evidence insufficient (best rerank score -11.09 (threshold -3.0))."
+      ],
+      "latency_ms": 721.2,
+      "keyword_recall": null,
+      "correct_refusal": true
+    },
+    {
+      "id": "u04",
+      "question": "Who is the company's Chief Financial Officer?",
+      "expected_route": "documents",
+      "route": "documents",
+      "answer": "I could not find sufficient evidence in the available sources to answer this question.",
+      "cited_sources": [],
+      "insufficient_evidence": true,
+      "sql_query": null,
+      "sql_error": null,
+      "sql_attempts": 0,
+      "warnings": [
+        "Document evidence insufficient (best rerank score -8.15 (threshold -3.0))."
+      ],
+      "latency_ms": 806.4,
+      "keyword_recall": null,
+      "correct_refusal": true
+    }
+  ],
+  "metrics": {
+    "questions": 34,
+    "errors": 0,
+    "routing_accuracy": 0.9706,
+    "sql_execution_success": 1.0,
+    "sql_result_match": 0.9286,
+    "answer_mentions_reference_values": 0.9286,
+    "keyword_recall": 1.0,
+    "citation_precision": 1.0,
+    "refusal_accuracy_unanswerable": 1.0,
+    "false_refusal_rate_answerable": 0.0,
+    "median_latency_ms": 2103.6
+  },
+  "config": {
+    "mode": "full",
+    "timestamp": "2026-11-02T17:56:54",
+    "benchmark_items": 34,
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "reranker_model": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+    "llm_model": "gpt-4o-mini",
+    "top_k": 5
+  }
+}
