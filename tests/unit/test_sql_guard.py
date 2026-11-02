@@ -45,6 +45,14 @@ def test_allows_read_only_selects(sql):
         ("SELECT * FROM generate_series(1, 1000000000)", "Table functions"),
         ("COPY orders TO '/tmp/out.csv'", "Only SELECT"),
         ("WITH d AS (DELETE FROM orders RETURNING *) SELECT * FROM d", "Forbidden"),
+        ("SELECT 'pg_authid'::regclass", "catalog type"),
+        ("SELECT CAST('orders' AS regclass)", "catalog type"),
+        ("SELECT 1::oid FROM orders", "catalog type"),
+        ("SELECT * FROM orders o, LATERAL (SELECT pg_sleep(1)) x", "pg_sleep"),
+        ("EXPLAIN ANALYZE DELETE FROM orders", "Only SELECT"),
+        ("PREPARE p AS SELECT 1", "Only SELECT"),
+        ("SELECT dblink_exec('host=x', 'drop table orders')", "dblink_exec"),
+        ("SELECT (SELECT rolpassword FROM pg_authid LIMIT 1) FROM orders", "allow-list"),
         ("", "Empty"),
         ("SELEC * FRM orders", ""),
     ],
@@ -70,3 +78,8 @@ def test_small_limit_is_preserved():
 def test_cte_names_are_not_treated_as_tables():
     sql = "WITH monthly AS (SELECT * FROM orders) SELECT * FROM monthly"
     assert "monthly" in validate_sql(sql, row_limit=10)
+
+
+def test_comments_are_stripped_from_executed_sql():
+    out = validate_sql("SELECT * FROM orders /* ; DROP TABLE orders */ -- x", row_limit=10)
+    assert "DROP" not in out and "/*" not in out

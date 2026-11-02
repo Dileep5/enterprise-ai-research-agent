@@ -1,0 +1,20 @@
+{"id": "p01", "question": "How long until my money comes back after I bring something back?", "expected_sources": ["return_policy.txt"], "expected_keywords": ["5 to 7 business days"], "answerable": true}
+{"id": "p02", "question": "Can I get my money back on clearance stuff?", "expected_sources": ["return_policy.txt"], "expected_keywords": ["FINAL"], "answerable": true}
+{"id": "p03", "question": "What happens if I lose my receipt?", "expected_sources": ["return_policy.txt"], "expected_keywords": ["store credit"], "answerable": true}
+{"id": "p04", "question": "My boots fell apart after two months, what do I do?", "expected_sources": ["return_policy.txt"], "expected_keywords": ["90 days"], "answerable": true}
+{"id": "p05", "question": "Is there a charge for swapping a jacket for a different size?", "expected_sources": ["return_policy.txt"], "expected_keywords": ["free of charge"], "answerable": true}
+{"id": "p06", "question": "How fast does a buy-online pickup order need to be prepared?", "expected_sources": ["store_operations_handbook.md"], "expected_keywords": ["2 hours"], "answerable": true}
+{"id": "p07", "question": "What should happen if counted stock differs from the system by a lot?", "expected_sources": ["store_operations_handbook.md"], "expected_keywords": ["full recount"], "answerable": true}
+{"id": "p08", "question": "How quickly must workplace injuries be written up?", "expected_sources": ["store_operations_handbook.md"], "expected_keywords": ["12 hours"], "answerable": true}
+{"id": "p09", "question": "Who leads the company?", "expected_sources": ["annual_report_2025.pdf"], "expected_keywords": ["Priya Natarajan"], "answerable": true}
+{"id": "p10", "question": "How much did profitability on goods sold improve?", "expected_sources": ["annual_report_2025.pdf"], "expected_keywords": ["46.5%"], "answerable": true}
+{"id": "p11", "question": "How happy are customers according to the recommendation metric?", "expected_sources": ["annual_report_2025.pdf"], "expected_keywords": ["58"], "answerable": true}
+{"id": "p12", "question": "What fraction of goods sold were sent back?", "expected_sources": ["annual_report_2025.pdf"], "expected_keywords": ["7.9%"], "answerable": true}
+{"id": "p13", "question": "Where are the company planning more locations?", "expected_sources": ["annual_report_2025.pdf"], "expected_keywords": ["Atlantic Canada"], "answerable": true}
+{"id": "p14", "question": "What do I get on my birthday as a member?", "expected_sources": ["loyalty_program.docx"], "expected_keywords": ["200-point"], "answerable": true}
+{"id": "p15", "question": "How many points do I need for a ten dollar reward?", "expected_sources": ["loyalty_program.docx"], "expected_keywords": ["1,000 points"], "answerable": true}
+{"id": "p16", "question": "Which vendors have the best environmental scores and make clothing?", "expected_sources": ["supplier_directory.csv"], "expected_keywords": ["Lakeshore Textiles"], "answerable": true}
+{"id": "p17", "question": "Which camping gear maker is located in Portugal?", "expected_sources": ["supplier_directory.csv"], "expected_keywords": ["Granite Footwear"], "answerable": true}
+{"id": "p18", "question": "What time do shops open on Sundays?", "expected_sources": ["store_operations_handbook.md"], "expected_keywords": ["11:00"], "answerable": true}
+{"id": "p19", "question": "When does the cash drawer get balanced?", "expected_sources": ["store_operations_handbook.md"], "expected_keywords": ["shift change"], "answerable": true}
+{"id": "p20", "question": "How much extra buffer inventory for tents in summer?", "expected_sources": ["store_operations_handbook.md"], "expected_keywords": ["25%"], "answerable": true}

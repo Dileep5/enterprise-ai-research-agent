@@ -129,6 +129,8 @@ def _ensure_readonly_role(cur, user: str, password: str, dbname: str) -> None:
     cur.execute(sql.SQL("ALTER ROLE {} SET default_transaction_read_only = on").format(ident))
     cur.execute(sql.SQL("ALTER ROLE {} SET statement_timeout = '10s'").format(ident))
     cur.execute(sql.SQL("REVOKE ALL ON SCHEMA public FROM {}").format(ident))
+    # PostgreSQL < 15 grants CREATE on schema public to PUBLIC; remove it explicitly.
+    cur.execute("REVOKE CREATE ON SCHEMA public FROM PUBLIC")
     cur.execute(sql.SQL("GRANT CONNECT ON DATABASE {} TO {}").format(sql.Identifier(dbname), ident))
     cur.execute(sql.SQL("GRANT USAGE ON SCHEMA public TO {}").format(ident))
     cur.execute(sql.SQL("GRANT SELECT ON ALL TABLES IN SCHEMA public TO {}").format(ident))
@@ -141,7 +143,10 @@ def main() -> None:
     args = parser.parse_args()
     if not args.admin_url:
         parser.error("Provide --admin-url or set DATABASE_ADMIN_URL.")
-    counts = seed(args.admin_url, settings.readonly_db_user, settings.readonly_db_password.get_secret_value())
+    password = settings.readonly_db_password.get_secret_value() if settings.readonly_db_password else ""
+    if len(password) < 8 or password.startswith("change-me"):
+        parser.error("Set READONLY_DB_PASSWORD (8+ characters, not the .env.example placeholder).")
+    counts = seed(args.admin_url, settings.readonly_db_user, password)
     for table, n in counts.items():
         print(f"{table:12s} {n:>6d} rows")
     print(f"Read-only role '{settings.readonly_db_user}' is ready.")

@@ -24,6 +24,7 @@ from langchain_core.runnables import RunnableConfig
 from langgraph.graph import END, START, StateGraph
 
 from app.agent.citations import build_citation, cited_indices, format_document_evidence, location_label
+from app.agent.grounding import unsupported_numbers
 from app.agent.router import route_question
 from app.agent.sql_generation import generate_sql
 from app.errors import (
@@ -61,6 +62,7 @@ class AgentState(TypedDict, total=False):
     answer: str
     citations: list[dict]
     insufficient_evidence: bool
+    grounding: dict
     warnings: Annotated[list[str], operator.add]
     steps: Annotated[list[str], operator.add]
 
@@ -190,7 +192,15 @@ class ResearchAgent:
         if chunks and not valid and not sql_result:
             warnings.append("Answer did not cite any document evidence.")
         citations = [build_citation(i, chunks[i - 1]) for i in valid]
+        sources = {str(i): c["text"] for i, c in enumerate(chunks, start=1)}
+        if sql_result:
+            sources["SQL"] = self._format_sql_evidence(sql_result)
+        unsupported = unsupported_numbers(answer, "\n\n".join(evidence), state["question"], sources)
+        if unsupported:
+            warnings.append("Answer contains numbers not found in the evidence (verify or treat as derived): "
+                            + ", ".join(unsupported))
         return {"answer": answer, "citations": citations, "insufficient_evidence": False,
+                "grounding": {"numbers_unsupported": unsupported, "checked": True},
                 "warnings": warnings, "steps": ["synthesize"]}
 
     # --------------------------------------------------------------- helpers

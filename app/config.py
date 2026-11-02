@@ -34,9 +34,11 @@ class Settings(BaseSettings):
     retrieval_top_k: int = Field(default=5, ge=1, le=50)
     retrieval_candidates: int = Field(default=20, ge=1, le=200)
     rrf_k: int = Field(default=60, ge=1)
-    # Evidence thresholds. A question is answered only if the best candidate
-    # clears the threshold for whichever scorer is active.
-    min_rerank_score: float = -3.0
+    # Evidence gate (stage 1 of refusal; the LLM's INSUFFICIENT_EVIDENCE is stage 2).
+    # Calibrated for recall on eval/retrieval_paraphrase.jsonl + eval/calibration_unanswerable.jsonl:
+    # at -9.0 the gate passes 16/20 answerable paraphrases (vs 6/20 at -3.0) and still
+    # rejects 15/20 unanswerable questions before any LLM call. See IMPLEMENTATION_DETAILS.md.
+    min_rerank_score: float = -9.0
     min_dense_similarity: float = 0.30
 
     # --- SQL -----------------------------------------------------------------
@@ -44,7 +46,7 @@ class Settings(BaseSettings):
     database_url: str | None = None
     database_admin_url: str | None = None
     readonly_db_user: str = "agent_readonly"
-    readonly_db_password: SecretStr = SecretStr("change-me")
+    readonly_db_password: SecretStr | None = None  # required by scripts/seed_db.py; no default
     sql_row_limit: int = Field(default=200, ge=1, le=10_000)
     sql_statement_timeout_ms: int = Field(default=5_000, ge=100)
     sql_max_attempts: int = Field(default=2, ge=1, le=5)

@@ -9,6 +9,7 @@ SELECT-only grants and a READ ONLY transaction with a statement timeout (see
 * no row locks (FOR UPDATE / FOR SHARE);
 * only allow-listed tables in the public schema;
 * no dangerous functions (pg_sleep, pg_read_file, dblink, set_config, ...);
+* no casts to catalog types (regclass, oid, ...) that probe system catalogs;
 * a LIMIT no greater than the configured row limit.
 """
 
@@ -39,6 +40,7 @@ _FORBIDDEN_FUNCTIONS = frozenset(
     {"set_config", "current_setting", "version", "inet_server_addr", "txid_current", "nextval", "setval"}
 )
 _SET_OPERATIONS = (exp.Union, exp.Intersect, exp.Except)
+_CATALOG_TYPES = ("REG", "OID", "PG_LSN", "TXID")
 
 
 def _function_name(node: exp.Func) -> str:
@@ -78,6 +80,9 @@ def validate_sql(sql: str, *, row_limit: int, allowed_tables: frozenset[str] = A
             name = _function_name(node)
             if name in _FORBIDDEN_FUNCTIONS or name.startswith(_FORBIDDEN_FUNCTION_PREFIXES):
                 raise UnsafeSQLError(f"Function '{name}' is not allowed.")
+        if isinstance(node, exp.DataType) and node.sql(dialect="postgres").upper().startswith(_CATALOG_TYPES):
+            # 'pg_authid'::regclass etc. resolve names against the system catalogs.
+            raise UnsafeSQLError(f"Cast to catalog type '{node.sql(dialect='postgres')}' is not allowed.")
 
     cte_names = {cte.alias_or_name.lower() for cte in tree.find_all(exp.CTE)}
     for table in tree.find_all(exp.Table):
@@ -93,7 +98,8 @@ def validate_sql(sql: str, *, row_limit: int, allowed_tables: frozenset[str] = A
             raise UnsafeSQLError(f"Table '{name}' is not in the allow-list.")
 
     tree = _enforce_limit(tree, row_limit)
-    return tree.sql(dialect="postgres")
+    # Re-render from the AST without comments: only what was validated reaches PostgreSQL.
+    return tree.sql(dialect="postgres", comments=False)
 
 
 def _enforce_limit(tree: exp.Expression, row_limit: int) -> exp.Expression:

@@ -105,6 +105,7 @@ def query(body: QueryRequest, services: Services = Depends(services_dep)) -> Que
         citations=state.get("citations", []),
         sql=sql,
         insufficient_evidence=state.get("insufficient_evidence", False),
+        grounding=state.get("grounding") or {},
         warnings=state.get("warnings", []),
         steps=state.get("steps", []),
         latency_ms=state["latency_ms"],

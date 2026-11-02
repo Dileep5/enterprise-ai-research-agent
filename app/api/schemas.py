@@ -42,6 +42,11 @@ class SQLInfo(BaseModel):
     attempts: int = 0
 
 
+class Grounding(BaseModel):
+    checked: bool = False
+    numbers_unsupported: list[str] = []
+
+
 class QueryResponse(BaseModel):
     answer: str
     route: Literal["documents", "sql", "both"]
@@ -49,6 +54,7 @@ class QueryResponse(BaseModel):
     citations: list[Citation] = []
     sql: SQLInfo | None = None
     insufficient_evidence: bool = False
+    grounding: Grounding = Grounding()
     warnings: list[str] = []
     steps: list[str] = []
     latency_ms: float

@@ -17,7 +17,7 @@ pytestmark = pytest.mark.models
 def services(tmp_path_factory):
     # Use the production thresholds from Settings defaults.
     settings = make_settings(tmp_path_factory.mktemp("models"), chunk_size=800, chunk_overlap=120,
-                             min_rerank_score=-3.0, min_dense_similarity=0.30)
+                             min_rerank_score=-9.0, min_dense_similarity=0.30)
     svc = build_services(
         settings,
         embedder=SentenceTransformerEmbedder(settings.embedding_model),

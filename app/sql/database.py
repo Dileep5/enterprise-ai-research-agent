@@ -5,6 +5,7 @@ from __future__ import annotations
 import datetime as dt
 import decimal
 import logging
+import time
 from dataclasses import dataclass, field
 
 import psycopg
@@ -63,14 +64,19 @@ class RetailDatabase:
         self.connect_timeout_s = connect_timeout_s
         self._schema_cache: str | None = None
 
-    def _connect(self) -> psycopg.Connection:
+    def _connect(self, attempts: int = 2, backoff_s: float = 0.5) -> psycopg.Connection:
+        """Connect with one retry for transient failures (e.g. DB restarting)."""
         if not self.dsn:
             raise DatabaseUnavailableError("DATABASE_URL is not configured.")
-        try:
-            return psycopg.connect(self.dsn, connect_timeout=self.connect_timeout_s, autocommit=False)
-        except psycopg.OperationalError as exc:
-            logger.warning("Database connection failed: %s", exc)
-            raise DatabaseUnavailableError("The retail database is unavailable.") from exc
+        for attempt in range(1, attempts + 1):
+            try:
+                return psycopg.connect(self.dsn, connect_timeout=self.connect_timeout_s, autocommit=False)
+            except psycopg.OperationalError as exc:
+                logger.warning("Database connection failed (attempt %d/%d): %s", attempt, attempts, exc)
+                if attempt == attempts:
+                    raise DatabaseUnavailableError("The retail database is unavailable.") from exc
+                time.sleep(backoff_s * attempt)
+        raise AssertionError("unreachable")
 
     def execute(self, sql: str) -> SQLResult:
         # Cap one row above the limit so truncation can be detected and reported.
