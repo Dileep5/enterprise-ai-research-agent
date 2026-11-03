@@ -1,239 +1,168 @@
 # Enterprise AI Research & Data Intelligence Agent
 
-A LangGraph agent that answers business questions from two kinds of sources:
-
-- **Unstructured documents** (PDF, DOCX, TXT/MD, CSV) via hybrid retrieval: dense vectors (Sentence Transformers + ChromaDB) and BM25, fused with Reciprocal Rank Fusion and reranked by a cross-encoder. Answers carry citations down to the page or CSV row range.
-- **Structured retail data** in PostgreSQL via guarded text-to-SQL. Every query passes an AST-level allow-list and runs in a read-only transaction under a SELECT-only role.
-
-The agent routes each question to documents, SQL, or both. It refuses when the evidence is insufficient, and it degrades gracefully when the LLM, the vector store or the database fails. The same capabilities are exposed through a FastAPI service and an MCP server.
-
-## Architecture
+A LangGraph agent that answers business questions from **documents** (hybrid RAG with citations) and from a **PostgreSQL** retail database (guarded text-to-SQL), or from both at once. It refuses when the evidence is insufficient, flags numbers the evidence does not support, and recovers from mis-routing, bad SQL and dependency outages. It is served through FastAPI and an MCP server.
 
 ```mermaid
 flowchart LR
-    subgraph Clients
-        U[HTTP client] --> API
-        M[MCP client<br/>Claude Desktop / IDE] --> MCP
-    end
-    API[FastAPI<br/>app/main.py] --> AG
-    MCP[MCP server<br/>app/mcp_server.py] --> AG
-    MCP --> RET
-    MCP --> DB
-
-    subgraph AG[LangGraph agent - app/agent/graph.py]
-        direction LR
-        R{route} -->|documents| RT[retrieve]
-        R -->|both| RT
-        R -->|sql| GS[generate_sql]
-        RT -->|both| GS
-        GS --> EX[execute_sql]
-        EX -->|error, retry once| GS
-        EX -->|no usable rows| RT
-        RT --> SY[synthesize<br/>+ citations]
-        EX --> SY
-    end
-
-    RT --> RET
-    subgraph RET[Hybrid retriever]
-        D[Chroma dense<br/>all-MiniLM-L6-v2] --> F[RRF fusion]
-        B[BM25 Lucene IDF] --> F
-        F --> X[Cross-encoder rerank<br/>ms-marco-MiniLM-L-6-v2]
-        X --> G{evidence<br/>threshold}
-    end
-
-    EX --> DB
-    subgraph DB[SQL safety layers]
-        V[sqlglot AST guard<br/>SELECT-only, table allow-list,<br/>function deny-list, LIMIT cap] --> TX[READ ONLY txn<br/>+ statement_timeout]
-        TX --> PG[(PostgreSQL<br/>agent_readonly role)]
-    end
-
-    SY --> LLM[OpenAI via<br/>langchain-openai]
-    GS --> LLM
-    R --> LLM
-    AG -.callbacks.-> LF[Langfuse<br/>optional]
-
-    UP[POST /documents] --> ING[Loaders -> chunker -> embedder] --> D
+    Q[Question] --> R{LangGraph router}
+    R -->|documents| H[Hybrid retrieval<br/>Chroma + BM25 → RRF → cross-encoder]
+    R -->|sql| S[Text-to-SQL<br/>sqlglot guard → read-only txn → SELECT-only role]
+    R -->|both| H --> S
+    S -->|error: retry once| S
+    S -->|no usable rows / LLM refused| H
+    H --> G{evidence gate}
+    G -->|pass| A[LLM answer with citations]
+    S --> A
+    A --> V[citation + numeric grounding checks]
+    G -->|fail| X[refuse]
 ```
 
-### Ingestion pipeline
+More detail: [ARCHITECTURE.md](ARCHITECTURE.md) · [IMPLEMENTATION_DETAILS.md](IMPLEMENTATION_DETAILS.md) · [TEST_RESULTS.md](TEST_RESULTS.md) · [TROUBLESHOOTING.md](TROUBLESHOOTING.md) · [INTERVIEW_GUIDE.md](INTERVIEW_GUIDE.md)
 
-```mermaid
-flowchart LR
-    A[Upload] --> B{extension?}
-    B -->|pdf| P[pypdf<br/>per-page text]
-    B -->|docx| W[python-docx<br/>paragraphs + tables]
-    B -->|txt/md| T[UTF-8, latin-1 fallback]
-    B -->|csv| C[pandas<br/>rows as 'col: value']
-    B -->|other| E[415 unsupported]
-    P & W & T & C --> S[RecursiveCharacterTextSplitter]
-    S --> H[sha256 doc_id<br/>duplicate check]
-    H --> EM[embed] --> CH[(ChromaDB)]
-```
+## Highlights (all measured; see TEST_RESULTS.md)
 
-## Features
+- **Hybrid retrieval that earns its complexity.** On 20 paraphrased questions, chunk-level hit@1 is 0.75 dense-only, 0.60 BM25-only, 0.80 with RRF and **0.85** with RRF plus cross-encoder; MRR is 0.838 → **0.917**.
+- **Two-stage refusal.**
+  - **Stage 1, the evidence gate:** a cross-encoder threshold calibrated for recall. The original value refused 70% of answerable paraphrases; the calibrated one refuses 20%.
+  - **Stage 2, the LLM:** asked to refuse explicitly when the evidence doesn't answer the question.
+  - **Results:** 4/4 unanswerable benchmark questions refused in 3/3 runs, 20/20 in the robustness set, and 0 false refusals on the benchmark.
+- **Three-layer SQL security.**
+  - **Layer 1:** a sqlglot AST guard. It survived a 25-statement adversarial probe once a `regclass` gap the probe found was closed.
+  - **Layer 2:** read-only transactions with a statement timeout.
+  - **Layer 3:** a SELECT-only database role.
+- **Grounding checks.**
+  - **Citation support:** the cited chunks contain the expected facts in 100% of benchmark answers.
+  - **Numbers:** a citation-aware check confirms every number in a sentence appears in the source that sentence cites.
+- **Self-correcting graph:** SQL errors are fed back to the LLM for one retry, and the graph falls back from SQL to documents when the router guessed wrong.
 
-| Area | Implementation |
-|---|---|
-| Orchestration | LangGraph `StateGraph` with conditional routing, an SQL retry loop that feeds the database error back to the LLM, and a fallback from SQL to documents |
-| Routing | LLM classifier (JSON output) with a deterministic keyword fallback when the LLM is down or returns unparseable output |
-| Retrieval | Chroma (cosine) + BM25 → RRF (k=60) → cross-encoder rerank; BM25 index rebuilt automatically after new ingestions |
-| Grounding | Numbered evidence and `[n]` citations; invalid citation numbers dropped with a warning; evidence threshold short-circuits before calling the LLM; partial-answer handling for multi-source questions |
-| SQL safety | sqlglot AST validation (single SELECT/CTE/set-op, no DML/DDL/`SELECT INTO`/locks, allow-listed tables, no `pg_*`/`dblink`/`set_config`, LIMIT cap), `SET TRANSACTION READ ONLY`, `statement_timeout`, and a SELECT-only role with `default_transaction_read_only` |
-| Ingestion | PDF / DOCX / TXT / MD / CSV, content-addressed IDs (re-uploads are idempotent), per-file errors on multi-file upload, upload size limit |
-| Errors | Typed domain errors → consistent JSON (`415`, `422`, `413`, `400`, `503`); unhandled errors return a generic 500 without leaking internals |
-| MCP | `search_documents`, `list_documents`, `list_tables`, `describe_table`, `run_readonly_sql`, `ask_research_agent` (stdio transport) |
-| Observability | Langfuse LangChain callback, enabled only when keys are set; a broken tracing backend cannot take the API down |
-| Evaluation | `scripts/evaluate.py` + `eval/benchmark.jsonl` (34 questions): routing, hit@k/MRR, evidence gate, SQL result match against reference queries, keyword recall, citation precision, refusal accuracy |
+## Prerequisites
 
-## Quick start (local)
+- Python 3.11 or 3.12
+- PostgreSQL 14+ (local), **or** Docker with Compose
+- An OpenAI API key (needed for SQL generation and answer synthesis; retrieval and tests run without one)
+- About 2 GB of disk for dependencies and ~180 MB for the Hugging Face models (downloaded on first use)
 
-Requirements: Python 3.11+ and PostgreSQL 14+.
+## Run locally
 
 ```bash
-python3.12 -m venv .venv && .venv/bin/pip install -r requirements-dev.txt
-cp .env.example .env            # set OPENAI_API_KEY, DB passwords
-
-# Schema, deterministic demo data (2,500 orders) and the read-only role
-.venv/bin/python -m scripts.seed_db
-# Index the demo documents (downloads ~180 MB of models on first run)
-.venv/bin/python -m scripts.ingest_samples
-
-.venv/bin/uvicorn app.main:app --reload     # http://localhost:8000/docs
+git clone <repo-url> enterprise-ai-research-agent && cd enterprise-ai-research-agent
+make install                    # python3.12 -m venv .venv + pip install -r requirements-dev.txt
+cp .env.example .env            # set OPENAI_API_KEY, DATABASE_URL, DATABASE_ADMIN_URL, READONLY_DB_PASSWORD
+make seed                       # creates the DB if missing, schema, 2,500 demo orders, read-only role
+make ingest                     # indexes data/documents/ (5 files: PDF, DOCX, TXT, MD, CSV)
+make run                        # http://localhost:8000/docs
 ```
 
-## Docker
+**Stop:** Ctrl-C. **Clean up:** `rm -rf storage/` (vector index), `dropdb retail` (demo database).
+
+## Run with Docker
 
 ```bash
 cp .env.example .env            # set OPENAI_API_KEY, POSTGRES_PASSWORD, READONLY_DB_PASSWORD
-docker compose up --build       # postgres -> init (seed + ingest) -> api on :8000
+docker compose up --build       # postgres → init (seed + ingest, one-shot) → api on :8000
+docker compose down             # stop
+docker compose down -v          # stop and delete database + vector-index volumes
 ```
 
-The image bakes in the embedding and reranker models, so containers start without downloading them.
+> The Compose stack and Dockerfile were **not executed** during development; Docker was unavailable. The base images and the Linux dependency resolution were verified instead. See TEST_RESULTS.md.
 
-## API examples
+## Example requests
 
 ```bash
-# Upload documents (multipart, multiple files allowed)
+curl -s localhost:8000/health
+
 curl -F files=@data/documents/return_policy.txt -F files=@data/documents/annual_report_2025.pdf \
-     http://localhost:8000/documents
-
-# Ask: routing is automatic; "mode" can force documents | sql | both
-curl -s localhost:8000/query -H 'content-type: application/json' \
-     -d '{"question": "How long do Gold members have to return items?"}'
+     localhost:8000/documents
 
 curl -s localhost:8000/query -H 'content-type: application/json' \
-     -d '{"question": "What were the top 3 stores by completed revenue in 2025?"}'
-
-# Hand-written SQL goes through the same guard
-curl -s localhost:8000/sql -H 'content-type: application/json' -d '{"sql": "DROP TABLE orders"}'
-# -> 400 {"error":"unsafe_sql","message":"Only SELECT queries are allowed (got DROP)."}
+     -d '{"question": "How many Gold tier customers do we have, and what extra return time does the policy give them?"}'
 ```
 
-Abridged response from a live run (local PostgreSQL, `gpt-4o-mini`):
+Response from a real run (abridged):
 
 ```json
 {
-  "answer": "Gold members have an extended return window of 60 days to return items [1]. However, electronics must be returned within 30 days ... [2].",
-  "route": "documents",
-  "citations": [{"id": 1, "source": "return_policy.txt", "location": "return_policy.txt", "...": "..."}],
-  "insufficient_evidence": false,
-  "steps": ["route", "retrieve", "synthesize"]
+  "answer": "There are 44 Gold tier customers [SQL]. Gold tier loyalty members receive an extended return window of 60 days [1][4].",
+  "route": "both",
+  "citations": [{"id": 1, "location": "return_policy.txt"}, {"id": 4, "location": "loyalty_program.docx"}],
+  "sql": {"query": "SELECT COUNT(*) AS gold_tier_customer_count FROM customers WHERE loyalty_tier = 'Gold' LIMIT 201", "rows": [[44]]},
+  "grounding": {"checked": true, "numbers_unsupported": []},
+  "steps": ["route", "retrieve", "generate_sql", "execute_sql", "synthesize"]
 }
 ```
 
-### Example questions
-
-| Route | Question |
+| Try | Expected path |
 |---|---|
-| documents | What restocking fee applies to opened tents returned after 14 days? |
-| documents | According to the annual report, what share of revenue came from e-commerce? |
-| sql | Which store had the highest revenue from completed orders? |
-| sql | How many store and product combinations are below their reorder point? |
-| both | How many Gold tier customers do we have, and what return window does the policy give them? |
-| refused | What is the parental leave policy for store employees? |
+| What restocking fee applies to opened tents returned after 14 days? | documents, cites return_policy.txt |
+| Which product category had the highest completed revenue in October 2025? | sql |
+| Which supplier has the longest lead time? | sql → no usable rows → documents (self-correction) |
+| Compare our 2025 online order share with the e-commerce share in the annual report | both |
+| What is the parental leave policy? | refused |
+| `POST /sql {"sql": "DROP TABLE orders"}` | 400 `unsafe_sql` |
 
 ## MCP server
 
 ```bash
-.venv/bin/python -m app.mcp_server        # stdio transport
+.venv/bin/python -m app.mcp_server     # stdio; tools: search_documents, list_documents, list_tables,
+                                       # describe_table, run_readonly_sql, ask_research_agent
 ```
-
-Example client configuration (e.g. Claude Desktop):
 
 ```json
-{
-  "mcpServers": {
-    "research-agent": {
-      "command": "/abs/path/enterprise-ai-research-agent/.venv/bin/python",
-      "args": ["-m", "app.mcp_server"],
-      "cwd": "/abs/path/enterprise-ai-research-agent",
-      "env": {"DATABASE_URL": "postgresql://agent_readonly:...@localhost:5432/retail"}
-    }
-  }
-}
+{"mcpServers": {"research-agent": {
+  "command": "/abs/path/.venv/bin/python", "args": ["-m", "app.mcp_server"],
+  "cwd": "/abs/path/enterprise-ai-research-agent",
+  "env": {"DATABASE_URL": "postgresql://agent_readonly:...@localhost:5432/retail"}}}}
 ```
 
-## Tests
+## Tests and evaluation
 
 ```bash
-make test                                            # 118 unit tests: fakes only, no network
-TEST_DATABASE_URL=postgresql://postgres:pw@localhost:5432/retail_test make test-integration   # 12 tests
-make test-models                                     # 7 tests with the real HF models
+make lint
+make test                                                     # 140 unit tests, no network
+TEST_DATABASE_URL=postgresql://postgres:pw@localhost:5432/retail_test make test-integration   # 13
+make test-models                                              # 7, real Hugging Face models
+make eval-retrieval                                           # offline retrieval metrics
+.venv/bin/python -m scripts.evaluate --mode ablation          # retriever ablation
+make eval-full                                                # full agent (OpenAI + DB)
+.venv/bin/python -m scripts.evaluate --mode full --repeats 3  # variance across runs
 ```
 
-Unit tests cover the SQL guard (33 allow/deny cases), loaders and malformed files, RRF math, BM25, hybrid retrieval, every graph path (documents, SQL, retry, both, fallback, LLM outage, DB outage, unsafe SQL), the HTTP API (validation, size limits, error codes) and the MCP tools. PostgreSQL tests check the read-only role, statement timeout, truncation and a real agent SQL round trip.
+Latest results (commit `9ec1f00`): **160 passed, 0 failed**. Full agent on the 34-question benchmark, 3 runs:
 
-## Evaluation
-
-```bash
-make eval-retrieval     # offline: no LLM calls
-make eval-full          # full agent: needs OPENAI_API_KEY + DATABASE_URL
-```
-
-Results from the runs recorded in `eval/results/` (34 questions; `gpt-4o-mini`, MiniLM embedder, MS MARCO MiniLM cross-encoder):
-
-| Metric | Value |
+| Metric | Result |
 |---|---|
-| Retrieval hit@1 / hit@5 / MRR (20 document questions) | 1.00 / 1.00 / 1.00 |
-| Evidence gate rejects unanswerable (4), with reranker / without | 4/4 / 3/4 |
-| Routing accuracy, LLM router / keyword fallback | 0.97 / 0.91 |
-| SQL executed successfully (14 questions with reference SQL) | 1.00 |
-| SQL result matches reference query | 0.93 (13/14) |
-| Answer keyword recall | 1.00 |
-| Citation precision | 1.00 |
-| Refusals on unanswerable questions | 4/4 |
-| False refusals on answerable questions | 0/30 |
-| Median end-to-end latency (local, CPU) | ~1.7 s |
+| SQL executed | 14/14 |
+| SQL result matches reference | 13/14 |
+| Keyword recall | 1.00 |
+| Citation support | 1.00 |
+| Unanswerable refused | 4/4 |
+| False refusals | 0 |
+| Median latency | 1.9 s |
 
-**How to read these numbers:**
-- The corpus is five short documents, so retrieval saturates. These results show the pipeline works; they do not show retrieval quality at scale.
-- The benchmark was also used while developing the prompts (see `VERIFICATION.md`), so it is not a held-out test set.
-- The single SQL miss (b01) computed an online share of *revenue* where the reference expects a share of *orders*.
-- LLM outputs vary between runs.
+Caveats: the corpus is small (13 chunks), and the benchmarks were used during development. TEST_RESULTS.md has the details and the history.
 
 ## Project layout
 
 ```
-app/
-  agent/        graph.py (LangGraph), router.py, sql_generation.py, citations.py
-  api/          routes.py, schemas.py (Pydantic v2)
-  ingestion/    loaders.py, chunking.py, pipeline.py
-  retrieval/    embeddings.py, vector_store.py, bm25.py, fusion.py, reranker.py, hybrid.py
-  sql/          guard.py (sqlglot), database.py (psycopg 3)
-  llm/          client.py (langchain-openai), prompts.py
-  observability/tracing.py (Langfuse)
-  mcp_server.py, services.py, config.py, main.py
-data/documents/ demo corpus (PDF, DOCX, TXT, MD, CSV)   data/retail/schema.sql
-scripts/        seed_db.py, ingest_samples.py, evaluate.py, make_sample_docs.py
-eval/           benchmark.jsonl, results/
-tests/          unit/, integration/
+app/agent/          graph.py (LangGraph), router.py, sql_generation.py, citations.py, grounding.py
+app/retrieval/      embeddings, vector_store (Chroma), bm25, fusion (RRF), reranker, hybrid
+app/sql/            guard.py (sqlglot), database.py (psycopg 3, read-only execution)
+app/ingestion/      loaders (PDF/DOCX/TXT/MD/CSV), chunking, pipeline
+app/api/            routes.py, schemas.py      app/mcp_server.py      app/observability/tracing.py
+scripts/            seed_db.py, ingest_samples.py, evaluate.py, make_sample_docs.py
+eval/               benchmark.jsonl (34), retrieval_paraphrase.jsonl (20), calibration_unanswerable.jsonl (20), results/
+tests/              unit/ (fakes), integration/ (PostgreSQL, MCP stdio, real models)
 ```
 
 ## Limitations
 
-- **Docker and CI not run.** The Docker images, Compose stack and GitHub Actions workflow were written but not executed in this environment (Docker was unavailable). The same steps were run locally against a native PostgreSQL 16.
-- **Langfuse not exercised.** Tracing is wired in but was never run against a live Langfuse instance; no credentials were available.
-- **BM25 index is in memory.** It is rebuilt from Chroma after each write, which suits thousands of chunks, not millions.
-- **No authentication on the API.** Add auth before exposing it beyond localhost.
-- **Text-to-SQL depends on the LLM.** Without an API key, SQL questions return a configuration message. Document questions fall back to showing the retrieved passages.
-- **All data is fictional.** The company (Maple Ridge Outfitters) and its documents were made up for the demo.
+- **Small, in-sample evaluation.** Five demo documents (13 chunks); the benchmarks were used during development.
+- **Evidence gate recall.** Some conversational paraphrases are still refused (4/20 in the robustness set).
+- **Silent SQL semantic errors.** Text-to-SQL can return a valid query that answers a different question. The query is always returned for inspection.
+- **Not executed:** Docker, the GitHub Actions workflow and live Langfuse tracing.
+- **No API authentication** and an in-memory BM25 index, both fine for a demo, not for production.
+- **Unfixed advisories:** `chromadb` 1.5.9 has advisories with no fixed release yet; see TROUBLESHOOTING.md.
+
+## License
+
+MIT. See [LICENSE](LICENSE).
