@@ -103,7 +103,20 @@ def generate(seed: int = SEED) -> dict[str, list[tuple]]:
             "orders": orders, "order_items": items, "inventory": inventory}
 
 
+def ensure_database(admin_url: str) -> None:
+    """Create the target database if it does not exist (connects to the 'postgres' DB)."""
+    from psycopg.conninfo import conninfo_to_dict, make_conninfo
+
+    params = conninfo_to_dict(admin_url)
+    maintenance = make_conninfo(**{**params, "dbname": "postgres"})
+    with psycopg.connect(maintenance, autocommit=True) as conn:
+        if not conn.execute("SELECT 1 FROM pg_database WHERE datname = %s", (params["dbname"],)).fetchone():
+            conn.execute(sql.SQL("CREATE DATABASE {}").format(sql.Identifier(params["dbname"])))
+            print(f"created database {params['dbname']}")
+
+
 def seed(admin_url: str, readonly_user: str, readonly_password: str) -> dict[str, int]:
+    ensure_database(admin_url)
     data = generate()
     with psycopg.connect(admin_url, autocommit=False) as conn:
         with conn.cursor() as cur:
