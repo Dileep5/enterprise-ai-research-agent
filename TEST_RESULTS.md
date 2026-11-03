@@ -178,8 +178,26 @@ MCP was checked with a real `mcp.client.stdio` session: listing tools, a SELECT,
 | Docker base images (Docker Hub API) | `python:3.12-slim`, `postgres:16-alpine` exist |
 | Linux dependency resolution (`uv pip compile --python-platform` x86_64 + aarch64) | resolves (147 pins, `torch==2.15.0+cpu`) |
 
+## 6. GitHub Actions CI
+
+The workflow is `.github/workflows/ci.yml` (job `test`, `ubuntu-latest`, Python 3.12, `postgres:16-alpine` service container).
+
+| Run | Commit | Trigger | Result | Duration |
+|---|---|---|---|---|
+| [41555765925](https://github.com/Dileep5/enterprise-ai-research-agent/actions/runs/41555765925) | `277afce` | first push to `main`, 2026-11-03T00:51Z | **success** | 2m37s (00:51:07 → 00:53:44 UTC) |
+
+Every step concluded `success`:
+1. install dependencies (CPU-only torch);
+2. lint (`ruff`);
+3. dependency checks (`pip check` + `pip-audit`, ignoring only the 4 documented chromadb IDs);
+4. unit tests with coverage;
+5. PostgreSQL + MCP stdio integration tests (`-m "not models"`);
+6. Hugging Face model cache;
+7. real-model retrieval tests plus the offline retrieval eval.
+
+**Scope of this evidence:** the step results above come from the GitHub Actions API. Downloading job logs through the API requires repository admin rights, so the **exact test counts printed by CI were not retrieved** and are not claimed here; they are visible in the run's logs on GitHub. All exact counts in sections 1–5 come from local runs.
+
 ## Not verified
 
-- **Docker:** `docker build` and `docker compose up` were never run, because Docker is not installed on this machine. Base images and Linux dependency resolution were checked instead.
-- **GitHub Actions:** the workflow has not run; the repository is not pushed. Every command in it was run locally.
+- **Docker / Docker Compose:** `docker build` and `docker compose up` were never run, because Docker is not installed on this machine. Base images and Linux dependency resolution were checked instead.
 - **Langfuse:** no live server was available. Handler construction and callback propagation are unit-tested.

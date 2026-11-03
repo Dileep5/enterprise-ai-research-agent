@@ -1,5 +1,7 @@
 # Enterprise AI Research & Data Intelligence Agent
 
+[![CI](https://github.com/Dileep5/enterprise-ai-research-agent/actions/workflows/ci.yml/badge.svg)](https://github.com/Dileep5/enterprise-ai-research-agent/actions/workflows/ci.yml)
+
 A LangGraph agent that answers business questions from **documents** (hybrid RAG with citations) and from a **PostgreSQL** retail database (guarded text-to-SQL), or from both at once. It refuses when the evidence is insufficient, flags numbers the evidence does not support, and recovers from mis-routing, bad SQL and dependency outages. It is served through FastAPI and an MCP server.
 
 ```mermaid
@@ -127,7 +129,11 @@ make eval-full                                                # full agent (Open
 .venv/bin/python -m scripts.evaluate --mode full --repeats 3  # variance across runs
 ```
 
-Latest results (commit `9ec1f00`): **160 passed, 0 failed**. Full agent on the 34-question benchmark, 3 runs:
+**Where the results come from:**
+- **Local runs** (macOS, PostgreSQL 16) produced the exact test counts and every eval metric below.
+- **GitHub Actions** (Ubuntu, PostgreSQL 16 service container) runs lint, dependency checks, unit tests, PostgreSQL + MCP integration tests, real-model tests and the offline retrieval eval on every push. The first run, [41555765925](https://github.com/Dileep5/enterprise-ai-research-agent/actions/runs/41555765925) on commit `277afce`, passed every step. CI test counts are visible in the run logs; they are not restated here.
+
+Latest local results (commit `9ec1f00`): **160 passed, 0 failed**. Full agent on the 34-question benchmark, 3 runs:
 
 | Metric | Result |
 |---|---|
@@ -159,7 +165,7 @@ tests/              unit/ (fakes), integration/ (PostgreSQL, MCP stdio, real mod
 - **Small, in-sample evaluation.** Five demo documents (13 chunks); the benchmarks were used during development.
 - **Evidence gate recall.** Some conversational paraphrases are still refused (4/20 in the robustness set).
 - **Silent SQL semantic errors.** Text-to-SQL can return a valid query that answers a different question. The query is always returned for inspection.
-- **Not executed:** Docker, the GitHub Actions workflow and live Langfuse tracing.
+- **Not executed:** Docker / Docker Compose (the images were never built) and live Langfuse tracing (only the wiring is unit-tested). The test suite runs in GitHub Actions; see above.
 - **No API authentication** and an in-memory BM25 index, both fine for a demo, not for production.
 - **Unfixed advisories:** `chromadb` 1.5.9 has advisories with no fixed release yet; see TROUBLESHOOTING.md.
 
