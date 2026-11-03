@@ -290,8 +290,9 @@ def reproducibility_metadata() -> dict:
     try:
         sha = subprocess.run(["git", "rev-parse", "--short", "HEAD"], cwd=ROOT, capture_output=True,
                              text=True, check=True).stdout.strip()
-        dirty = bool(subprocess.run(["git", "status", "--porcelain"], cwd=ROOT, capture_output=True,
-                                    text=True, check=True).stdout.strip())
+        # Result files written by earlier runs are outputs, not code changes.
+        dirty = bool(subprocess.run(["git", "status", "--porcelain", "--", ".", ":!eval/results"], cwd=ROOT,
+                                    capture_output=True, text=True, check=True).stdout.strip())
     except (OSError, subprocess.CalledProcessError):
         sha, dirty = None, None
     packages = ["langgraph", "langchain-openai", "chromadb", "sentence-transformers", "rank-bm25", "sqlglot"]

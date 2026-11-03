@@ -33,3 +33,15 @@ def build_callbacks(settings: Settings) -> list:
     except Exception as exc:  # pragma: no cover - depends on external service/package
         logger.warning("Langfuse tracing disabled: %s", exc)
         return []
+
+
+def flush_traces(settings: Settings) -> None:
+    """Flush buffered Langfuse events (v3 exports in the background) before shutdown."""
+    if not settings.langfuse_configured:
+        return
+    try:
+        from langfuse import get_client
+
+        get_client().flush()
+    except Exception as exc:  # pragma: no cover - depends on external service
+        logger.warning("Langfuse flush failed: %s", exc)

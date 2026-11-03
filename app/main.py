@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import logging
 from collections.abc import Callable
+from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
@@ -15,6 +16,7 @@ from app.api.routes import router
 from app.config import get_settings
 from app.errors import AppError
 from app.logging_config import configure_logging
+from app.observability.tracing import flush_traces
 from app.services import Services, get_services
 
 logger = logging.getLogger(__name__)
@@ -24,7 +26,13 @@ def create_app(services_factory: Callable[[], Services] | None = None) -> FastAP
     settings = get_settings()
     configure_logging(settings.log_level)
 
+    @asynccontextmanager
+    async def lifespan(_: FastAPI):
+        yield
+        flush_traces(settings)
+
     app = FastAPI(
+        lifespan=lifespan,
         title=settings.app_name,
         version="1.0.0",
         description="Hybrid-RAG + text-to-SQL research agent orchestrated with LangGraph.",
