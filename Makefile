@@ -11,8 +11,8 @@ lint:
 test:
 	$(PY) -m pytest tests/unit -q
 
-test-integration:   ## needs TEST_DATABASE_URL (admin URL of a disposable database)
-	$(PY) -m pytest tests/integration -q -m postgres
+test-integration:   ## needs TEST_DATABASE_URL (admin URL of a disposable database; created if missing)
+	$(PY) -m pytest tests/integration -q -m "not models"   # PostgreSQL + MCP stdio
 
 test-models:        ## downloads ~180 MB of Hugging Face models
 	RUN_MODEL_TESTS=1 $(PY) -m pytest tests/integration -q -m models
