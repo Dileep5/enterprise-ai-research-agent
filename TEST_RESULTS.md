@@ -50,6 +50,36 @@ The audit added 23 tests:
 - 1 MCP stdio discovery test;
 - 2 agent tests (the SQL→documents fallback and evidence-to-SQL context).
 
+## 1b. Reproduction check (commit `fee3feb`, 2026-11-03)
+
+Re-run from a clean state to confirm the reported counts:
+
+```
+[2026-11-03T00:38:14Z] $ TEST_DATABASE_URL=postgresql://postgres@localhost:5432/retail_test RUN_MODEL_TESTS=1 pytest -q
+160 passed in 13.72s
+[2026-11-03T00:38:32Z] $ pytest tests/unit/test_sql_guard.py -q
+42 passed in 0.02s
+[2026-11-03T00:38:33Z] $ TEST_DATABASE_URL=... pytest tests/integration/test_postgres.py -q -k 'readonly or guard or timeout or unreachable or bad_column'
+6 passed, 6 deselected in 1.45s
+[2026-11-03T00:38:35Z] $ python -m scripts.evaluate --mode ablation
+paraphrase/dense              hit@1 0.75  hit@5 0.95  MRR 0.8375
+paraphrase/bm25               hit@1 0.60  hit@5 0.80  MRR 0.6792
+paraphrase/hybrid_rrf         hit@1 0.80  hit@5 1.00  MRR 0.8875
+paraphrase/hybrid_rrf_rerank  hit@1 0.85  hit@5 1.00  MRR 0.9167
+paraphrase/evidence_gate_pass_rate 0.8          (identical to the 18:53 run; eval/results/ablation-20261102-193853.json)
+```
+
+### SQL security tests (what the 42 + 6 cover)
+
+| Layer | Tests | What is asserted |
+|---|---|---|
+| 1. AST guard (`tests/unit/test_sql_guard.py`, 42) | 8 allowed queries | SELECT, CTE, UNION, joins, casts to `date`, `LIKE '%…%'`, subqueries pass, with a LIMIT injected |
+| | 29 rejected statements | DML/DDL, multi-statement (`SELECT 1; DROP …`), `SELECT INTO`, `FOR UPDATE`, `pg_sleep`, `pg_read_file`, `set_config`, `dblink_exec`, `lo_import`-style functions, `pg_catalog`/`information_schema`/`pg_user`, unknown tables, `generate_series` table function, `COPY`, DML inside a CTE, `regclass`/`oid` casts, `LATERAL pg_sleep`, `EXPLAIN ANALYZE DELETE`, `PREPARE`, catalog subqueries, empty and unparseable SQL |
+| | 5 behaviour tests | LIMIT added / capped / preserved, CTE names not treated as tables, comments stripped |
+| 2. Read-only transaction (`test_postgres.py`) | `test_statement_timeout_is_enforced`, `test_bad_column_gives_readable_error`, `test_guard_runs_before_database` | timeout → readable error; DB error surfaced; guard runs before any connection |
+| 3. Database role (`test_postgres.py`) | `test_readonly_role_cannot_write_even_without_guard`, `test_readonly_role_cannot_create_tables` | connecting directly as the role, `DELETE` and `CREATE TABLE` fail even with `default_transaction_read_only` turned off |
+| — | `test_unreachable_database` | connection failure → `DatabaseUnavailableError` after one retry |
+
 ## 2. Evaluation (commit `8840310`)
 
 | Run | File | Result |
